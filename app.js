@@ -7,7 +7,7 @@
 // ============================================
 
 // IMPORTANT: Replace this URL with your Google Apps Script Web App URL
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzJEY-s_3onfo57Gp4mS43V5tEFS6kIyxPRWKfqvYJmZO7SXaBtw5kXXuc4jZUZkAxgtg/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwh6LtrEY0hZ_Z0AA-bFNupBIiLhG2w0KVq9ohoSlWf4YIAzB9ExzwyaqWzthxId3-eGg/exec';
 
 // Items bank - Professional version
 const ITEMS_PROFESSIONAL = [
@@ -418,7 +418,7 @@ async function submitData() {
     nextBtn.disabled = true;
     
     try {
-        if (GOOGLE_SCRIPT_URL !== 'https://script.google.com/macros/s/AKfycbzJEY-s_3onfo57Gp4mS43V5tEFS6kIyxPRWKfqvYJmZO7SXaBtw5kXXuc4jZUZkAxgtg/exec') {
+        if (GOOGLE_SCRIPT_URL !== 'https://script.google.com/macros/s/AKfycbwh6LtrEY0hZ_Z0AA-bFNupBIiLhG2w0KVq9ohoSlWf4YIAzB9ExzwyaqWzthxId3-eGg/exec') {
             await fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
