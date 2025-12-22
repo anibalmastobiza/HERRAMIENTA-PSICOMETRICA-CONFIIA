@@ -431,7 +431,7 @@ async function submitData() {
             console.log('Survey data (demo mode):', payload);
         }
         
-        document.getElementById('participant-code').textContent = state.participantId;
+       
         nextScreen();
         
     } catch (error) {
