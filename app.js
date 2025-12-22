@@ -61,7 +61,7 @@ const ITEMS_CITIZEN = [
         id: 'C2',
         dimension: 'Innovación-tradición',
         text: '¿Preferiría una recomendación tradicional frente a una innovadora de IA para su tratamiento?',
-        reverse: false // Note: This one is already framed negatively toward AI
+        reverse: false
     },
     {
         id: 'C3',
@@ -154,7 +154,6 @@ function nextScreen() {
         currentScreenEl.classList.remove('active');
         nextScreenEl.classList.add('active');
         
-        // Special handling for items screen
         if (screens[state.currentScreen] === 'screen-items') {
             initializeItems();
         }
@@ -216,7 +215,6 @@ function validateDemographics() {
     const form = document.getElementById('demographics-form');
     const formData = new FormData(form);
     
-    // Check required fields
     const role = formData.get('role');
     const age = formData.get('age');
     const sex = formData.get('sex');
@@ -251,7 +249,6 @@ function validateDemographics() {
         errorMessages.push('Por favor, indique si ha usado IA en contextos clínicos');
     }
     
-    // Professional-specific validation
     if (role === 'profesional') {
         const profession = formData.get('profession');
         const experience = formData.get('experience');
@@ -272,7 +269,6 @@ function validateDemographics() {
         return;
     }
     
-    // Store demographics
     state.responses.demographics = {
         role: role,
         age: parseInt(age),
@@ -299,7 +295,6 @@ function initializeItems() {
         container.innerHTML += itemHtml;
     });
     
-    // Show first item
     showItem(0);
     updateProgress();
 }
@@ -341,18 +336,15 @@ function showItem(index) {
     
     state.currentItem = index;
     
-    // Update navigation buttons
     const prevBtn = document.getElementById('btn-prev-item');
     const nextBtn = document.getElementById('btn-next-item');
     
     prevBtn.style.visibility = index === 0 ? 'hidden' : 'visible';
     
-    // Check if current item is answered
     const currentItemId = state.items[index].id;
     const isAnswered = state.responses.items[currentItemId] !== undefined;
     nextBtn.disabled = !isAnswered;
     
-    // Change button text for last item
     if (index === state.items.length - 1) {
         nextBtn.innerHTML = `
             Finalizar
@@ -376,8 +368,6 @@ function showItem(index) {
 
 function handleItemResponse(itemId, value, index) {
     state.responses.items[itemId] = value;
-    
-    // Enable next button
     document.getElementById('btn-next-item').disabled = false;
 }
 
@@ -385,7 +375,6 @@ function nextItem() {
     if (state.currentItem < state.items.length - 1) {
         showItem(state.currentItem + 1);
     } else {
-        // All items completed - submit and go to end screen
         submitData();
     }
 }
@@ -410,7 +399,6 @@ function updateProgress() {
 async function submitData() {
     const endTime = new Date().toISOString();
     
-    // Prepare data payload
     const payload = {
         participant_id: state.participantId,
         start_time: state.startTime,
@@ -425,13 +413,11 @@ async function submitData() {
         ...state.responses.items
     };
     
-    // Show loading state
     const nextBtn = document.getElementById('btn-next-item');
     nextBtn.classList.add('loading');
     nextBtn.disabled = true;
     
     try {
-        // Send to Google Sheets
         if (GOOGLE_SCRIPT_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
             await fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
@@ -442,11 +428,9 @@ async function submitData() {
                 body: JSON.stringify(payload)
             });
         } else {
-            // Demo mode - just log data
             console.log('Survey data (demo mode):', payload);
         }
         
-        // Show completion screen
         document.getElementById('participant-code').textContent = state.participantId;
         nextScreen();
         
@@ -462,7 +446,6 @@ async function submitData() {
 // UTILITY FUNCTIONS
 // ============================================
 
-// Prevent accidental page close
 window.addEventListener('beforeunload', (e) => {
     if (state.currentScreen > 0 && state.currentScreen < screens.length - 1) {
         e.preventDefault();
@@ -470,14 +453,11 @@ window.addEventListener('beforeunload', (e) => {
     }
 });
 
-// Keyboard navigation
 document.addEventListener('keydown', (e) => {
-    // Only handle keyboard nav in items screen
     if (screens[state.currentScreen] !== 'screen-items') return;
     
     const key = e.key;
     
-    // Number keys for response
     if (['1', '2', '3', '4'].includes(key)) {
         const value = parseInt(key);
         const currentItemId = state.items[state.currentItem].id;
@@ -488,7 +468,6 @@ document.addEventListener('keydown', (e) => {
         }
     }
     
-    // Arrow keys for navigation
     if (e.key === 'ArrowRight' || e.key === 'Enter') {
         const nextBtn = document.getElementById('btn-next-item');
         if (!nextBtn.disabled) {
