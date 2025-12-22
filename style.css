@@ -5,7 +5,6 @@
 
 /* CSS Variables */
 :root {
-    /* Colors - Refined Academic Palette */
     --color-ink: #1a1a2e;
     --color-ink-light: #3d3d5c;
     --color-ink-muted: #6b6b8a;
@@ -20,12 +19,10 @@
     --color-border: #d4d2cc;
     --color-border-light: #e8e6e0;
     
-    /* Typography */
     --font-display: 'Cormorant Garamond', Georgia, serif;
     --font-body: 'IBM Plex Sans', -apple-system, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
     
-    /* Spacing */
     --space-xs: 0.25rem;
     --space-sm: 0.5rem;
     --space-md: 1rem;
@@ -34,23 +31,19 @@
     --space-2xl: 3rem;
     --space-3xl: 4rem;
     
-    /* Transitions */
     --transition-fast: 150ms ease;
     --transition-base: 250ms ease;
     --transition-slow: 400ms ease;
     
-    /* Shadows */
     --shadow-sm: 0 1px 2px rgba(26, 26, 46, 0.05);
     --shadow-md: 0 4px 12px rgba(26, 26, 46, 0.08);
     --shadow-lg: 0 8px 30px rgba(26, 26, 46, 0.12);
     
-    /* Border Radius */
     --radius-sm: 4px;
     --radius-md: 8px;
     --radius-lg: 12px;
 }
 
-/* Reset & Base */
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -75,7 +68,6 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* Noise Overlay for Texture */
 .noise-overlay {
     position: fixed;
     top: 0;
@@ -88,7 +80,6 @@ body {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
 
-/* Header */
 .study-header {
     position: fixed;
     top: 0;
@@ -124,7 +115,6 @@ body {
     letter-spacing: 0.05em;
 }
 
-/* Main Container */
 .survey-container {
     flex: 1;
     display: flex;
@@ -134,7 +124,6 @@ body {
     position: relative;
 }
 
-/* Screen System */
 .screen {
     display: none;
     width: 100%;
@@ -170,7 +159,6 @@ body {
     align-items: center;
 }
 
-/* Decorative Elements */
 .decorative-element {
     position: absolute;
     pointer-events: none;
@@ -206,7 +194,6 @@ body {
     z-index: -1;
 }
 
-/* Welcome Screen */
 .study-badge {
     display: inline-block;
     font-family: var(--font-mono);
@@ -261,7 +248,6 @@ body {
     height: 18px;
 }
 
-/* Buttons */
 .btn-primary, .btn-secondary {
     display: inline-flex;
     align-items: center;
@@ -318,7 +304,6 @@ body {
     transform: translateX(-3px);
 }
 
-/* Section Indicator */
 .section-indicator {
     display: flex;
     align-items: baseline;
@@ -349,7 +334,6 @@ body {
     margin-bottom: var(--space-xl);
 }
 
-/* Consent Box */
 .consent-box {
     background: var(--color-paper-warm);
     border: 1px solid var(--color-border-light);
@@ -391,7 +375,6 @@ body {
     opacity: 0.7;
 }
 
-/* Custom Checkbox */
 .consent-checkbox-container {
     margin-bottom: var(--space-xl);
 }
@@ -456,14 +439,12 @@ body {
     color: var(--color-ink-light);
 }
 
-/* Navigation Buttons */
 .nav-buttons {
     display: flex;
     justify-content: space-between;
     gap: var(--space-md);
 }
 
-/* Form Styles */
 .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -534,7 +515,6 @@ body {
     padding-right: 44px;
 }
 
-/* Role Selector */
 .role-selector {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -597,7 +577,6 @@ body {
     line-height: 1.4;
 }
 
-/* Radio Groups */
 .radio-group {
     display: flex;
     flex-direction: column;
@@ -657,7 +636,6 @@ body {
     transform: translate(-50%, -50%) scale(1);
 }
 
-/* Likert Scale */
 .likert-scale {
     padding: var(--space-md) 0;
 }
@@ -715,7 +693,6 @@ body {
     color: white;
 }
 
-/* Instructions */
 .instructions-box {
     background: var(--color-paper-warm);
     border: 1px solid var(--color-border-light);
@@ -772,7 +749,6 @@ body {
     margin-bottom: 0 !important;
 }
 
-/* Progress Bar */
 .progress-container {
     margin-bottom: var(--space-xl);
 }
@@ -799,7 +775,6 @@ body {
     color: var(--color-ink-muted);
 }
 
-/* Item Card */
 .item-card {
     display: none;
     animation: slideIn var(--transition-base) ease;
@@ -868,7 +843,6 @@ body {
     margin-top: var(--space-md);
 }
 
-/* Completion Screen */
 .completion-icon {
     width: 80px;
     height: 80px;
@@ -944,7 +918,6 @@ body {
     color: var(--color-ink-muted);
 }
 
-/* Footer */
 .study-footer {
     padding: var(--space-lg) var(--space-xl);
     border-top: 1px solid var(--color-border-light);
@@ -960,7 +933,6 @@ body {
     color: var(--color-ink-muted);
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .study-header {
         flex-direction: column;
@@ -1025,7 +997,6 @@ body {
     }
 }
 
-/* Validation States */
 .form-group.error .form-input,
 .form-group.error .form-select {
     border-color: var(--color-accent);
@@ -1041,7 +1012,6 @@ body {
     margin-top: var(--space-xs);
 }
 
-/* Loading State */
 .btn-primary.loading {
     position: relative;
     color: transparent;
