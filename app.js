@@ -7,7 +7,7 @@
 // ============================================
 
 // IMPORTANT: Replace this URL with your Google Apps Script Web App URL
-const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzJEY-s_3onfo57Gp4mS43V5tEFS6kIyxPRWKfqvYJmZO7SXaBtw5kXXuc4jZUZkAxgtg/exec';
 
 // Items bank - Professional version
 const ITEMS_PROFESSIONAL = [
