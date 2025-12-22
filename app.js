@@ -418,7 +418,7 @@ async function submitData() {
     nextBtn.disabled = true;
     
     try {
-        if (GOOGLE_SCRIPT_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+        if (GOOGLE_SCRIPT_URL !== 'https://script.google.com/macros/s/AKfycbzJEY-s_3onfo57Gp4mS43V5tEFS6kIyxPRWKfqvYJmZO7SXaBtw5kXXuc4jZUZkAxgtg/exec') {
             await fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
