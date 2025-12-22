@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONFIIA | Confianza en IA Clínica</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="noise-overlay"></div>
+    
+    <header class="study-header">
+        <div class="institution-bar">
+            <span class="institution">Universidad de Granada</span>
+            <span class="separator">·</span>
+            <span class="department">Departamento de Filosofía</span>
+        </div>
+        <div class="study-id">
+            <span class="protocol">Protocolo CONFIIA-2025</span>
+        </div>
+    </header>
+
+    <main class="survey-container">
+        <!-- Welcome Screen -->
+        <section class="screen active" id="screen-welcome">
+            <div class="screen-content">
+                <div class="study-badge">Estudio de Investigación</div>
+                <h1 class="main-title">
+                    <span class="title-line">Confianza en</span>
+                    <span class="title-line accent">Inteligencia Artificial</span>
+                    <span class="title-line">Clínica</span>
+                </h1>
+                <p class="study-description">
+                    Este estudio examina las actitudes de profesionales sanitarios y ciudadanos 
+                    hacia el uso de sistemas de inteligencia artificial en contextos de decisión clínica.
+                </p>
+                <div class="time-estimate">
+                    <svg class="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12,6 12,12 16,14"/>
+                    </svg>
+                    <span>Tiempo estimado: 5-7 minutos</span>
+                </div>
+                <button class="btn-primary" onclick="nextScreen()">
+                    Comenzar
+                    <svg class="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                        <polyline points="12,5 19,12 12,19"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="decorative-element de-1"></div>
+            <div class="decorative-element de-2"></div>
+        </section>
+
+        <!-- Consent Screen -->
+        <section class="screen" id="screen-consent">
+            <div class="screen-content">
+                <div class="section-indicator">
+                    <span class="section-number">01</span>
+                    <span class="section-label">Consentimiento Informado</span>
+                </div>
+                <h2 class="section-title">Información del Estudio</h2>
+                
+                <div class="consent-box">
+                    <div class="consent-section">
+                        <h3>Propósito</h3>
+                        <p>Este estudio, dirigido por investigadores del Departamento de Filosofía de la Universidad de Granada, tiene como objetivo desarrollar y validar un instrumento para medir la confianza en sistemas de inteligencia artificial aplicados a contextos sanitarios.</p>
+                    </div>
+                    
+                    <div class="consent-section">
+                        <h3>Procedimiento</h3>
+                        <p>Se le pedirá que responda a una serie de preguntas sobre sus actitudes hacia diferentes escenarios de uso de IA en entornos clínicos. No hay respuestas correctas o incorrectas.</p>
+                    </div>
+                    
+                    <div class="consent-section">
+                        <h3>Confidencialidad</h3>
+                        <p>Sus respuestas son completamente anónimas. No se recopila información que permita identificarle personalmente. Los datos se almacenarán de forma segura y se utilizarán exclusivamente con fines de investigación.</p>
+                    </div>
+                    
+                    <div class="consent-section">
+                        <h3>Participación voluntaria</h3>
+                        <p>Su participación es voluntaria. Puede abandonar el estudio en cualquier momento sin consecuencia alguna.</p>
+                    </div>
+                    
+                    <div class="consent-section">
+                        <h3>Contacto</h3>
+                        <p>Para cualquier pregunta sobre este estudio, puede contactar con el equipo investigador en: <a href="mailto:confiia@ugr.es">confiia@ugr.es</a></p>
+                    </div>
+                </div>
+
+                <div class="consent-checkbox-container">
+                    <label class="custom-checkbox">
+                        <input type="checkbox" id="consent-check" onchange="validateConsent()">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">He leído y comprendido la información anterior. Acepto participar voluntariamente en este estudio.</span>
+                    </label>
+                </div>
+
+                <div class="nav-buttons">
+                    <button class="btn-secondary" onclick="prevScreen()">
+                        <svg class="icon-arrow-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="19" y1="12" x2="5" y2="12"/>
+                            <polyline points="12,19 5,12 12,5"/>
+                        </svg>
+                        Atrás
+                    </button>
+                    <button class="btn-primary" id="btn-consent-next" onclick="nextScreen()" disabled>
+                        Continuar
+                        <svg class="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                            <polyline points="12,5 19,12 12,19"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Demographics Screen -->
+        <section class="screen" id="screen-demographics">
+            <div class="screen-content">
+                <div class="section-indicator">
+                    <span class="section-number">02</span>
+                    <span class="section-label">Datos Sociodemográficos</span>
+                </div>
+                <h2 class="section-title">Sobre usted</h2>
+                
+                <form id="demographics-form" class="form-grid">
+                    <!-- Role Selection -->
+                    <div class="form-group full-width">
+                        <label class="form-label required">¿Cuál es su perfil?</label>
+                        <div class="role-selector">
+                            <input type="radio" name="role" id="role-professional" value="profesional" onchange="updateRole()">
+                            <label for="role-professional" class="role-card">
+                                <div class="role-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                                    </svg>
+                                </div>
+                                <span class="role-title">Profesional Sanitario</span>
+                                <span class="role-desc">Médico/a, enfermero/a, u otro profesional de la salud</span>
+                            </label>
+                            
+                            <input type="radio" name="role" id="role-citizen" value="ciudadano" onchange="updateRole()">
+                            <label for="role-citizen" class="role-card">
+                                <div class="role-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                        <circle cx="12" cy="7" r="4"/>
+                                    </svg>
+                                </div>
+                                <span class="role-title">Ciudadano/a</span>
+                                <span class="role-desc">Paciente o ciudadano/a general</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Age -->
+                    <div class="form-group">
+                        <label class="form-label required" for="age">Edad</label>
+                        <input type="number" id="age" name="age" min="18" max="120" placeholder="Ej: 35" class="form-input" required>
+                    </div>
+
+                    <!-- Sex -->
+                    <div class="form-group">
+                        <label class="form-label required">Sexo</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="sex" value="mujer" required>
+                                <span class="radio-custom"></span>
+                                <span>Mujer</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="sex" value="hombre">
+                                <span class="radio-custom"></span>
+                                <span>Hombre</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="sex" value="otro">
+                                <span class="radio-custom"></span>
+                                <span>Otro / Prefiero no decir</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Profession (conditional) -->
+                    <div class="form-group professional-only hidden" id="profession-group">
+                        <label class="form-label required" for="profession">Profesión / Especialidad</label>
+                        <select id="profession" name="profession" class="form-select">
+                            <option value="">Seleccione...</option>
+                            <option value="medicina_general">Medicina General / Familia</option>
+                            <option value="medicina_interna">Medicina Interna</option>
+                            <option value="cirugia">Cirugía</option>
+                            <option value="pediatria">Pediatría</option>
+                            <option value="ginecologia">Ginecología</option>
+                            <option value="psiquiatria">Psiquiatría</option>
+                            <option value="oncologia">Oncología</option>
+                            <option value="radiologia">Radiología</option>
+                            <option value="enfermeria">Enfermería</option>
+                            <option value="farmacia">Farmacia</option>
+                            <option value="psicologia_clinica">Psicología Clínica</option>
+                            <option value="fisioterapia">Fisioterapia</option>
+                            <option value="otra">Otra especialidad</option>
+                        </select>
+                    </div>
+
+                    <!-- Years of experience (conditional) -->
+                    <div class="form-group professional-only hidden" id="experience-group">
+                        <label class="form-label required" for="experience">Años de experiencia</label>
+                        <input type="number" id="experience" name="experience" min="0" max="60" placeholder="Ej: 10" class="form-input">
+                    </div>
+
+                    <!-- AI Familiarity -->
+                    <div class="form-group full-width">
+                        <label class="form-label required">Familiaridad con Inteligencia Artificial</label>
+                        <p class="form-hint">¿Cómo de familiarizado/a está con sistemas de IA (ChatGPT, asistentes virtuales, sistemas de diagnóstico, etc.)?</p>
+                        <div class="likert-scale">
+                            <div class="likert-labels">
+                                <span>Nada familiarizado/a</span>
+                                <span>Muy familiarizado/a</span>
+                            </div>
+                            <div class="likert-options">
+                                <label class="likert-option">
+                                    <input type="radio" name="ai_familiarity" value="1" required>
+                                    <span class="likert-circle">1</span>
+                                </label>
+                                <label class="likert-option">
+                                    <input type="radio" name="ai_familiarity" value="2">
+                                    <span class="likert-circle">2</span>
+                                </label>
+                                <label class="likert-option">
+                                    <input type="radio" name="ai_familiarity" value="3">
+                                    <span class="likert-circle">3</span>
+                                </label>
+                                <label class="likert-option">
+                                    <input type="radio" name="ai_familiarity" value="4">
+                                    <span class="likert-circle">4</span>
+                                </label>
+                                <label class="likert-option">
+                                    <input type="radio" name="ai_familiarity" value="5">
+                                    <span class="likert-circle">5</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Clinical Use -->
+                    <div class="form-group full-width">
+                        <label class="form-label required">Uso previo de IA en contextos clínicos</label>
+                        <p class="form-hint">¿Ha utilizado o interactuado con algún sistema de IA en un contexto sanitario (como paciente o profesional)?</p>
+                        <div class="radio-group horizontal">
+                            <label class="radio-option">
+                                <input type="radio" name="ai_clinical_use" value="si" required>
+                                <span class="radio-custom"></span>
+                                <span>Sí</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="ai_clinical_use" value="no">
+                                <span class="radio-custom"></span>
+                                <span>No</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="ai_clinical_use" value="no_seguro">
+                                <span class="radio-custom"></span>
+                                <span>No estoy seguro/a</span>
+                            </label>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="nav-buttons">
+                    <button class="btn-secondary" onclick="prevScreen()">
+                        <svg class="icon-arrow-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="19" y1="12" x2="5" y2="12"/>
+                            <polyline points="12,19 5,12 12,5"/>
+                        </svg>
+                        Atrás
+                    </button>
+                    <button class="btn-primary" onclick="validateDemographics()">
+                        Continuar
+                        <svg class="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                            <polyline points="12,5 19,12 12,19"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Instructions Screen -->
+        <section class="screen" id="screen-instructions">
+            <div class="screen-content">
+                <div class="section-indicator">
+                    <span class="section-number">03</span>
+                    <span class="section-label">Instrucciones</span>
+                </div>
+                <h2 class="section-title">Cuestionario CONFIIA</h2>
+                
+                <div class="instructions-box">
+                    <p class="instructions-lead">A continuación se presentan <strong>6 situaciones hipotéticas</strong> relacionadas con el uso de inteligencia artificial en contextos sanitarios.</p>
+                    
+                    <p>Para cada situación, indique la probabilidad de que usted actuaría de la forma descrita, utilizando la siguiente escala:</p>
+                    
+                    <div class="scale-preview">
+                        <div class="scale-item">
+                            <span class="scale-number">1</span>
+                            <span class="scale-label">Muy improbable</span>
+                        </div>
+                        <div class="scale-item">
+                            <span class="scale-number">2</span>
+                            <span class="scale-label">Improbable</span>
+                        </div>
+                        <div class="scale-item">
+                            <span class="scale-number">3</span>
+                            <span class="scale-label">Probable</span>
+                        </div>
+                        <div class="scale-item">
+                            <span class="scale-number">4</span>
+                            <span class="scale-label">Muy probable</span>
+                        </div>
+                    </div>
+                    
+                    <p class="instructions-note">No hay respuestas correctas o incorrectas. Responda según su criterio personal.</p>
+                </div>
+
+                <div class="nav-buttons">
+                    <button class="btn-secondary" onclick="prevScreen()">
+                        <svg class="icon-arrow-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="19" y1="12" x2="5" y2="12"/>
+                            <polyline points="12,19 5,12 12,5"/>
+                        </svg>
+                        Atrás
+                    </button>
+                    <button class="btn-primary" onclick="nextScreen()">
+                        Comenzar cuestionario
+                        <svg class="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                            <polyline points="12,5 19,12 12,19"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Items Screen -->
+        <section class="screen" id="screen-items">
+            <div class="screen-content">
+                <div class="section-indicator">
+                    <span class="section-number">04</span>
+                    <span class="section-label">Cuestionario</span>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <span class="progress-text" id="progress-text">Pregunta 1 de 6</span>
+                </div>
+
+                <div class="items-container" id="items-container">
+                    <!-- Items will be dynamically inserted here -->
+                </div>
+
+                <div class="nav-buttons">
+                    <button class="btn-secondary" onclick="prevItem()" id="btn-prev-item" style="visibility: hidden;">
+                        <svg class="icon-arrow-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="19" y1="12" x2="5" y2="12"/>
+                            <polyline points="12,19 5,12 12,5"/>
+                        </svg>
+                        Anterior
+                    </button>
+                    <button class="btn-primary" onclick="nextItem()" id="btn-next-item" disabled>
+                        Siguiente
+                        <svg class="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                            <polyline points="12,5 19,12 12,19"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- End Screen -->
+        <section class="screen" id="screen-end">
+            <div class="screen-content centered">
+                <div class="completion-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                        <polyline points="22 4 12 14.01 9 11.01"/>
+                    </svg>
+                </div>
+                <h2 class="completion-title">¡Gracias por su participación!</h2>
+                <p class="completion-message">Sus respuestas han sido registradas correctamente.</p>
+                <p class="completion-submessage">Su contribución es valiosa para avanzar en la comprensión de la confianza en sistemas de IA en contextos clínicos.</p>
+                
+                <div class="completion-id">
+                    <span class="id-label">Código de participación:</span>
+                    <span class="id-value" id="participant-code">---</span>
+                </div>
+
+                <div class="completion-actions">
+                    <p class="action-note">Puede cerrar esta ventana o, si lo desea:</p>
+                    <a href="https://www.ugr.es/universidad/facultades-escuelas/facultad-filosofia-letras" target="_blank" class="btn-secondary">
+                        Visitar nuestra web
+                        <svg class="icon-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                            <polyline points="15 3 21 3 21 9"/>
+                            <line x1="10" y1="14" x2="21" y2="3"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="decorative-element de-3"></div>
+        </section>
+    </main>
+
+    <footer class="study-footer">
+        <div class="footer-content">
+            <span class="ethics-note">Estudio aprobado por el Comité de Ética de la Universidad de Granada</span>
+            <span class="copyright">© 2025 Proyecto CONFIIA</span>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
