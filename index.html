@@ -10,14 +10,11 @@
     <style>
         /* ========================================
            CONFIIA Survey v2 - Premium Design
-           Stanford Lab Style
            ======================================== */
-
         :root {
             --color-bg: #0a0a0f;
             --color-bg-elevated: #12121a;
             --color-bg-card: #1a1a24;
-            --color-bg-hover: #222230;
             --color-text: #f5f5f7;
             --color-text-secondary: #a1a1aa;
             --color-text-muted: #71717a;
@@ -26,34 +23,17 @@
             --color-accent-glow: rgba(99, 102, 241, 0.15);
             --color-success: #10b981;
             --color-border: rgba(255, 255, 255, 0.08);
-            --color-border-light: rgba(255, 255, 255, 0.04);
             
             --font-display: 'Source Serif 4', Georgia, serif;
-            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-body: 'Inter', sans-serif;
             --font-mono: 'Space Mono', monospace;
             
-            --radius-sm: 8px;
             --radius-md: 12px;
             --radius-lg: 20px;
-            --radius-xl: 28px;
-            
-            --shadow-glow: 0 0 60px rgba(99, 102, 241, 0.15);
-            --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
-            
             --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            font-size: 16px;
-            scroll-behavior: smooth;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: var(--font-body);
             background: var(--color-bg);
@@ -64,950 +44,71 @@
         }
 
         /* Background Effects */
-        .bg-gradient {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            pointer-events: none;
-            z-index: 0;
-        }
-
+        .bg-gradient { position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 0; }
         .bg-gradient::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
             background: radial-gradient(ellipse at 30% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
                         radial-gradient(ellipse at 70% 80%, rgba(139, 92, 246, 0.06) 0%, transparent 50%);
             animation: bgShift 20s ease-in-out infinite;
         }
-
-        @keyframes bgShift {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(-5%, 5%); }
-        }
-
+        @keyframes bgShift { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-5%, 5%); } }
+        
         .grid-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            pointer-events: none;
-            z-index: 0;
-            background-image: 
-                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 0;
+            background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
             background-size: 60px 60px;
             mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
         }
 
         /* Header */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            padding: 1.25rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: linear-gradient(to bottom, var(--color-bg) 0%, transparent 100%);
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .logo-mark {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
-            border-radius: var(--radius-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--font-mono);
-            font-weight: 700;
-            font-size: 0.875rem;
-        }
-
-        .logo-text {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            letter-spacing: 0.1em;
-            color: var(--color-text-secondary);
-            text-transform: uppercase;
-        }
-
-        .header-meta {
-            font-family: var(--font-mono);
-            font-size: 0.6875rem;
-            color: var(--color-text-muted);
-            letter-spacing: 0.05em;
-        }
-
-        /* Main Container */
-        .main {
-            position: relative;
-            z-index: 1;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 6rem 1.5rem 3rem;
-        }
-
-        /* Screen System */
-        .screen {
-            display: none;
-            width: 100%;
-            max-width: 640px;
-            animation: screenIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .screen.active {
-            display: block;
-        }
-
-        @keyframes screenIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px) scale(0.98);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        /* Welcome Screen */
-        .welcome-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: var(--color-accent-glow);
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            border-radius: 100px;
-            font-family: var(--font-mono);
-            font-size: 0.6875rem;
-            font-weight: 500;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--color-accent-light);
-            margin-bottom: 2rem;
-        }
-
-        .welcome-badge::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            background: var(--color-accent);
-            border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.2); }
-        }
-
-        .welcome-title {
-            font-family: var(--font-display);
-            font-size: clamp(2.5rem, 7vw, 4rem);
-            font-weight: 600;
-            line-height: 1.1;
-            letter-spacing: -0.03em;
-            margin-bottom: 1.5rem;
-        }
-
-        .welcome-title .highlight {
-            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 50%, #c084fc 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .welcome-description {
-            font-size: 1.125rem;
-            color: var(--color-text-secondary);
-            line-height: 1.7;
-            margin-bottom: 2rem;
-            max-width: 520px;
-        }
-
-        .welcome-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-            padding: 1.25rem;
-            background: var(--color-bg-card);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-md);
-        }
-
-        .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 0.625rem;
-        }
-
-        .meta-icon {
-            width: 20px;
-            height: 20px;
-            color: var(--color-accent);
-        }
-
-        .meta-text {
-            font-size: 0.875rem;
-            color: var(--color-text-secondary);
-        }
-
-        /* Buttons */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.625rem;
-            font-family: var(--font-body);
-            font-size: 0.9375rem;
-            font-weight: 500;
-            padding: 1rem 2rem;
-            border-radius: var(--radius-md);
-            border: none;
-            cursor: pointer;
-            transition: all var(--transition);
-            text-decoration: none;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
-            color: white;
-            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.4);
-        }
-
-        .btn-primary:active {
-            transform: translateY(0);
-        }
-
-        .btn-primary:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .btn-secondary {
-            background: var(--color-bg-card);
-            color: var(--color-text);
-            border: 1px solid var(--color-border);
-        }
-
-        .btn-secondary:hover {
-            background: var(--color-bg-hover);
-            border-color: var(--color-text-muted);
-        }
-
-        .btn-icon {
-            width: 18px;
-            height: 18px;
-            transition: transform var(--transition);
-        }
-
-        .btn-primary:hover .btn-icon {
-            transform: translateX(3px);
-        }
-
-        /* Card Styles */
-        .card {
-            background: var(--color-bg-card);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-lg);
-            padding: 2rem;
-        }
-
-        .card-header {
-            margin-bottom: 1.5rem;
-        }
-
-        .card-step {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-family: var(--font-mono);
-            font-size: 0.6875rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--color-accent);
-            margin-bottom: 0.75rem;
-        }
-
-        .card-step-number {
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--color-accent-glow);
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            border-radius: 6px;
-            font-weight: 700;
-        }
-
-        .card-title {
-            font-family: var(--font-display);
-            font-size: 1.75rem;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-        }
-
-        /* Consent Styles */
-        .consent-content {
-            margin-bottom: 1.5rem;
-        }
-
-        .consent-section {
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--color-border-light);
-        }
-
-        .consent-section:last-child {
-            border-bottom: none;
-        }
-
-        .consent-section h4 {
-            font-size: 0.875rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--color-text);
-        }
-
-        .consent-section p {
-            font-size: 0.875rem;
-            color: var(--color-text-secondary);
-            line-height: 1.6;
-        }
-
-        .consent-section a {
-            color: var(--color-accent-light);
-            text-decoration: none;
-        }
-
-        .consent-section a:hover {
-            text-decoration: underline;
-        }
-
-        /* Checkbox */
-        .checkbox-wrapper {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            padding: 1.25rem;
-            background: var(--color-bg-elevated);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-md);
-            cursor: pointer;
-            transition: all var(--transition);
-            margin-bottom: 1.5rem;
-        }
-
-        .checkbox-wrapper:hover {
-            border-color: var(--color-accent);
-            background: rgba(99, 102, 241, 0.05);
-        }
-
-        .checkbox-wrapper input {
-            position: absolute;
-            opacity: 0;
-        }
-
-        .checkbox-custom {
-            flex-shrink: 0;
-            width: 24px;
-            height: 24px;
-            border: 2px solid var(--color-border);
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all var(--transition);
-        }
-
-        .checkbox-wrapper input:checked + .checkbox-custom {
-            background: var(--color-accent);
-            border-color: var(--color-accent);
-        }
-
-        .checkbox-custom svg {
-            width: 14px;
-            height: 14px;
-            color: white;
-            opacity: 0;
-            transform: scale(0.5);
-            transition: all var(--transition);
-        }
-
-        .checkbox-wrapper input:checked + .checkbox-custom svg {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .checkbox-label {
-            font-size: 0.875rem;
-            color: var(--color-text-secondary);
-            line-height: 1.5;
-        }
-
-        /* Form Elements */
-        .form-grid {
-            display: grid;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        @media (max-width: 600px) {
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .form-label {
-            font-size: 0.8125rem;
-            font-weight: 500;
-            color: var(--color-text);
-        }
-
-        .form-label .required {
-            color: var(--color-accent);
-        }
-
-        .form-hint {
-            font-size: 0.75rem;
-            color: var(--color-text-muted);
-            margin-top: -0.25rem;
-        }
-
-        .form-input,
-        .form-select {
-            font-family: var(--font-body);
-            font-size: 0.9375rem;
-            padding: 0.875rem 1rem;
-            background: var(--color-bg-elevated);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-sm);
-            color: var(--color-text);
-            transition: all var(--transition);
-            width: 100%;
-        }
-
-        .form-input:focus,
-        .form-select:focus {
-            outline: none;
-            border-color: var(--color-accent);
-            box-shadow: 0 0 0 3px var(--color-accent-glow);
-        }
-
-        .form-input::placeholder {
-            color: var(--color-text-muted);
-        }
-
-        .form-select {
-            cursor: pointer;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2'%3E%3Cpolyline points='6,9 12,15 18,9'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 1rem center;
-            padding-right: 3rem;
-        }
-
-        /* Role Selector */
-        .role-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        @media (max-width: 500px) {
-            .role-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .role-card {
-            position: relative;
-            padding: 1.5rem;
-            background: var(--color-bg-elevated);
-            border: 2px solid var(--color-border);
-            border-radius: var(--radius-md);
-            cursor: pointer;
-            transition: all var(--transition);
-            text-align: center;
-        }
-
-        .role-card:hover {
-            border-color: var(--color-text-muted);
-            background: var(--color-bg-hover);
-        }
-
-        .role-card input {
-            position: absolute;
-            opacity: 0;
-        }
-
-        .role-card.selected {
-            border-color: var(--color-accent);
-            background: var(--color-accent-glow);
-        }
-
-        .role-icon {
-            width: 48px;
-            height: 48px;
-            margin: 0 auto 1rem;
-            padding: 0.75rem;
-            background: var(--color-bg-card);
-            border-radius: var(--radius-sm);
-            color: var(--color-text-muted);
-            transition: all var(--transition);
-        }
-
-        .role-card.selected .role-icon {
-            background: var(--color-accent);
-            color: white;
-        }
-
-        .role-icon svg {
-            width: 100%;
-            height: 100%;
-        }
-
-        .role-title {
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .role-desc {
-            font-size: 0.75rem;
-            color: var(--color-text-muted);
-        }
-
-        /* Radio & Likert */
-        .radio-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .radio-group.horizontal {
-            flex-direction: row;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-        }
-
-        .radio-option {
-            display: flex;
-            align-items: center;
-            gap: 0.625rem;
-            padding: 0.625rem 1rem;
-            background: var(--color-bg-elevated);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            transition: all var(--transition);
-        }
-
-        .radio-option:hover {
-            border-color: var(--color-text-muted);
-        }
-
-        .radio-option input {
-            position: absolute;
-            opacity: 0;
-        }
-
-        .radio-option.selected {
-            border-color: var(--color-accent);
-            background: var(--color-accent-glow);
-        }
-
-        .radio-circle {
-            width: 18px;
-            height: 18px;
-            border: 2px solid var(--color-border);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all var(--transition);
-        }
-
-        .radio-option.selected .radio-circle {
-            border-color: var(--color-accent);
-        }
-
-        .radio-circle::after {
-            content: '';
-            width: 8px;
-            height: 8px;
-            background: var(--color-accent);
-            border-radius: 50%;
-            transform: scale(0);
-            transition: transform var(--transition);
-        }
-
-        .radio-option.selected .radio-circle::after {
-            transform: scale(1);
-        }
-
-        .radio-text {
-            font-size: 0.875rem;
-        }
-
-        /* Likert Scale */
-        .likert-container {
-            padding: 1rem 0;
-        }
-
-        .likert-labels {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.6875rem;
-            color: var(--color-text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.75rem;
-        }
-
-        .likert-scale {
-            display: flex;
-            justify-content: space-between;
-            gap: 0.5rem;
-        }
-
-        .likert-option {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-        }
-
-        .likert-option input {
-            position: absolute;
-            opacity: 0;
-        }
-
-        .likert-btn {
-            width: 100%;
-            max-width: 60px;
-            aspect-ratio: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--font-mono);
-            font-size: 1rem;
-            font-weight: 600;
-            background: var(--color-bg-elevated);
-            border: 2px solid var(--color-border);
-            border-radius: var(--radius-sm);
-            color: var(--color-text-muted);
-            cursor: pointer;
-            transition: all var(--transition);
-        }
-
-        .likert-btn:hover {
-            border-color: var(--color-text-muted);
-            color: var(--color-text);
-        }
-
-        .likert-option input:checked + .likert-btn {
-            background: var(--color-accent);
-            border-color: var(--color-accent);
-            color: white;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
-        }
-
-        /* Progress Bar */
-        .progress-wrapper {
-            margin-bottom: 2rem;
-        }
-
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.75rem;
-        }
-
-        .progress-label {
-            font-family: var(--font-mono);
-            font-size: 0.6875rem;
-            color: var(--color-text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .progress-count {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--color-accent-light);
-        }
-
-        .progress-bar {
-            height: 4px;
-            background: var(--color-bg-elevated);
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
-            border-radius: 2px;
-            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* Item Card */
-        .item-wrapper {
-            min-height: 300px;
-        }
-
-        .item-card {
-            display: none;
-            animation: itemIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .item-card.active {
-            display: block;
-        }
-
-        @keyframes itemIn {
-            from {
-                opacity: 0;
-                transform: translateX(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .item-dimension {
-            display: inline-block;
-            font-family: var(--font-mono);
-            font-size: 0.625rem;
-            font-weight: 500;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--color-accent);
-            background: var(--color-accent-glow);
-            padding: 0.375rem 0.75rem;
-            border-radius: 4px;
-            margin-bottom: 1rem;
-        }
-
-        .item-question {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 500;
-            line-height: 1.4;
-            margin-bottom: 2rem;
-            color: var(--color-text);
-        }
-
-        /* Navigation */
-        .nav-buttons {
-            display: flex;
-            justify-content: space-between;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .nav-buttons .btn {
-            flex: 1;
-            max-width: 180px;
-        }
-
-        .nav-buttons .btn:first-child {
-            margin-right: auto;
-        }
-
-        .nav-buttons .btn:last-child {
-            margin-left: auto;
-        }
-
-        /* Completion Screen */
-        .completion-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(16, 185, 129, 0.1) 100%);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            border-radius: 50%;
-            color: var(--color-success);
-        }
-
-        .completion-icon svg {
-            width: 40px;
-            height: 40px;
-        }
-
-        .completion-title {
-            font-family: var(--font-display);
-            font-size: 2rem;
-            font-weight: 600;
-            text-align: center;
-            margin-bottom: 1rem;
-        }
-
-        .completion-message {
-            text-align: center;
-            color: var(--color-text-secondary);
-            margin-bottom: 2rem;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .completion-code {
-            text-align: center;
-            padding: 1.5rem;
-            background: var(--color-bg-card);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-md);
-            margin-bottom: 2rem;
-        }
-
-        .completion-code-label {
-            font-size: 0.6875rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--color-text-muted);
-            margin-bottom: 0.5rem;
-        }
-
-        .completion-code-value {
-            font-family: var(--font-mono);
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--color-accent-light);
-            letter-spacing: 0.05em;
-        }
-
-        /* Footer */
-        .footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.6875rem;
-            color: var(--color-text-muted);
-            background: linear-gradient(to top, var(--color-bg) 0%, transparent 100%);
-        }
-
-        .footer a {
-            color: var(--color-text-muted);
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            color: var(--color-text-secondary);
-        }
-
-        /* Utilities */
-        .hidden {
-            display: none !important;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        /* Loading State */
-        .btn.loading {
-            position: relative;
-            color: transparent;
-            pointer-events: none;
-        }
-
-        .btn.loading::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border: 2px solid transparent;
-            border-top-color: white;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Responsive */
-        @media (max-width: 640px) {
-            .header {
-                padding: 1rem;
-            }
-
-            .main {
-                padding: 5rem 1rem 2rem;
-            }
-
-            .card {
-                padding: 1.5rem;
-            }
-
-            .welcome-title {
-                font-size: 2rem;
-            }
-
-            .nav-buttons {
-                flex-direction: column;
-            }
-
-            .nav-buttons .btn {
-                max-width: none;
-            }
-
-            .footer {
-                flex-direction: column;
-                gap: 0.5rem;
-                text-align: center;
-            }
-        }
+        .header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.25rem 2rem; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to bottom, var(--color-bg) 0%, transparent 100%); }
+        .logo { display: flex; align-items: center; gap: 0.75rem; }
+        .logo-mark { width: 36px; height: 36px; background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; font-size: 0.875rem; }
+        .logo-text { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.1em; color: var(--color-text-secondary); text-transform: uppercase; }
+        .header-meta { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--color-text-muted); letter-spacing: 0.05em; }
+
+        /* Main */
+        .main { position: relative; z-index: 1; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 6rem 1.5rem 3rem; }
+        .screen { display: none; width: 100%; max-width: 640px; animation: screenIn 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        .screen.active { display: block; }
+        @keyframes screenIn { from { opacity: 0; transform: translateY(30px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+        .card { background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 2rem; }
+        .welcome-title { font-family: var(--font-display); font-size: clamp(2.5rem, 7vw, 4rem); font-weight: 600; line-height: 1.1; margin-bottom: 1.5rem; }
+        .welcome-title .highlight { background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 50%, #c084fc 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .welcome-description { font-size: 1.125rem; color: var(--color-text-secondary); margin-bottom: 2rem; }
+
+        /* Buttons & Forms */
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem; font-family: var(--font-body); font-size: 0.93rem; font-weight: 500; padding: 1rem 2rem; border-radius: var(--radius-md); border: none; cursor: pointer; transition: all var(--transition); text-decoration: none; }
+        .btn-primary { background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%); color: white; box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3); }
+        .btn-secondary { background: var(--color-bg-card); color: var(--color-text); border: 1px solid var(--color-border); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        .form-input, .form-select { font-family: var(--font-body); font-size: 0.93rem; padding: 0.87rem 1rem; background: var(--color-bg-elevated); border: 1px solid var(--color-border); border-radius: 8px; color: var(--color-text); width: 100%; margin-bottom: 1rem; }
+        
+        /* Role & Options */
+        .role-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+        .role-card { padding: 1.5rem; background: var(--color-bg-elevated); border: 2px solid var(--color-border); border-radius: var(--radius-md); cursor: pointer; text-align: center; }
+        .role-card.selected { border-color: var(--color-accent); background: var(--color-accent-glow); }
+        .role-card input { display: none; }
+
+        .likert-scale { display: flex; justify-content: space-between; gap: 0.5rem; margin-top: 1rem; }
+        .likert-btn { width: 100%; max-width: 60px; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; background: var(--color-bg-elevated); border: 2px solid var(--color-border); border-radius: 8px; cursor: pointer; }
+        .likert-option input { display: none; }
+        .likert-option input:checked + .likert-btn { background: var(--color-accent); border-color: var(--color-accent); color: white; }
+
+        .progress-bar { height: 4px; background: var(--color-bg-elevated); border-radius: 2px; margin: 1rem 0; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-accent-light) 100%); width: 0%; transition: width 0.4s ease; }
+
+        .hidden { display: none !important; }
+        .nav-buttons { display: flex; justify-content: space-between; gap: 1rem; margin-top: 1.5rem; }
+        
+        /* Loading */
+        .btn.loading { color: transparent; pointer-events: none; position: relative; }
+        .btn.loading::after { content: ''; position: absolute; width: 20px; height: 20px; border: 2px solid transparent; border-top-color: white; border-radius: 50%; animation: spin 0.8s linear infinite; left: 50%; top: 50%; margin-left: -10px; margin-top: -10px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .footer { position: fixed; bottom: 0; left: 0; right: 0; padding: 1rem 2rem; display: flex; justify-content: space-between; font-size: 0.68rem; color: var(--color-text-muted); background: linear-gradient(to top, var(--color-bg) 0%, transparent 100%); }
     </style>
 </head>
 <body>
@@ -1023,404 +124,156 @@
     </header>
 
     <main class="main">
-        <!-- Welcome Screen -->
         <section class="screen active" id="screen-welcome">
-            <div class="welcome-badge">
-                Estudio de Investigación
+            <div style="margin-bottom: 2rem;">
+                <span style="background: var(--color-accent-glow); color: var(--color-accent-light); padding: 0.5rem 1rem; border-radius: 100px; font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; border: 1px solid rgba(99,102,241,0.2);">Estudio de Investigación</span>
             </div>
-            <h1 class="welcome-title">
-                Confianza en<br>
-                <span class="highlight">Inteligencia Artificial</span><br>
-                Clínica
-            </h1>
-            <p class="welcome-description">
-                Estudio científico sobre las actitudes de profesionales sanitarios y ciudadanos hacia el uso de sistemas de IA en decisiones clínicas.
-            </p>
-            <div class="welcome-meta">
-                <div class="meta-item">
-                    <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <polyline points="12,6 12,12 16,14"/>
-                    </svg>
-                    <span class="meta-text">5-7 minutos</span>
-                </div>
-                <div class="meta-item">
-                    <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                    </svg>
-                    <span class="meta-text">100% anónimo</span>
-                </div>
-                <div class="meta-item">
-                    <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                        <polyline points="22 4 12 14.01 9 11.01"/>
-                    </svg>
-                    <span class="meta-text">Validado científicamente</span>
-                </div>
+            <h1 class="welcome-title">Confianza en<br><span class="highlight">Inteligencia Artificial</span><br>Clínica</h1>
+            <p class="welcome-description">Estudio científico sobre las actitudes de profesionales sanitarios y ciudadanos hacia el uso de sistemas de IA en decisiones clínicas.</p>
+            <div style="display: flex; gap: 1.5rem; margin-bottom: 3rem; padding: 1.25rem; background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: 12px;">
+                <span style="font-size: 0.9rem; color: var(--color-text-secondary);">⏱ 5-7 minutos</span>
+                <span style="font-size: 0.9rem; color: var(--color-text-secondary);">🔒 100% anónimo</span>
             </div>
-            <button class="btn btn-primary" onclick="nextScreen()">
-                Comenzar estudio
-                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="5" y1="12" x2="19" y2="12"/>
-                    <polyline points="12,5 19,12 12,19"/>
-                </svg>
-            </button>
+            <button class="btn btn-primary" onclick="nextScreen()">Comenzar estudio</button>
         </section>
 
-        <!-- Consent Screen -->
         <section class="screen" id="screen-consent">
             <div class="card">
-                <div class="card-header">
-                    <div class="card-step">
-                        <span class="card-step-number">1</span>
-                        Consentimiento Informado
-                    </div>
-                    <h2 class="card-title">Información del Estudio</h2>
+                <h2 style="font-family: var(--font-display); font-size: 1.75rem; margin-bottom: 1.5rem;">Consentimiento Informado</h2>
+                <div style="margin-bottom: 1.5rem; color: var(--color-text-secondary); font-size: 0.9rem;">
+                    <p style="margin-bottom: 1rem;">Este estudio tiene como objetivo desarrollar un instrumento para medir la confianza en IA sanitaria.</p>
+                    <p>Sus respuestas son completamente anónimas y se utilizarán exclusivamente con fines de investigación.</p>
                 </div>
-                
-                <div class="consent-content">
-                    <div class="consent-section">
-                        <h4>Propósito</h4>
-                        <p>Este estudio, dirigido por investigadores de la Universidad Pontificia de Comillas y de la Universidad de Granada, tiene como objetivo desarrollar un instrumento validado para medir la confianza en sistemas de IA aplicados a contextos sanitarios.</p>
-                    </div>
-                    <div class="consent-section">
-                        <h4>Procedimiento</h4>
-                        <p>Responderá a preguntas sobre sus actitudes hacia diferentes escenarios de uso de IA en entornos clínicos. No hay respuestas correctas o incorrectas.</p>
-                    </div>
-                    <div class="consent-section">
-                        <h4>Confidencialidad</h4>
-                        <p>Sus respuestas son completamente anónimas. No se recopila información identificable. Los datos se utilizarán exclusivamente con fines de investigación.</p>
-                    </div>
-                    <div class="consent-section">
-                        <h4>Contacto</h4>
-                        <p>Para consultas: <a href="mailto:confiia@ugr.es">amastobiza@ugr.es y rortegal@comillas.edu </a></p>
-                    </div>
-                </div>
-
-                <label class="checkbox-wrapper">
+                <label class="checkbox-wrapper" style="display: flex; gap: 1rem; cursor: pointer; padding: 1rem; background: var(--color-bg-elevated); border-radius: 12px; border: 1px solid var(--color-border);">
                     <input type="checkbox" id="consent-check" onchange="validateConsent()">
-                    <span class="checkbox-custom">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                            <polyline points="20 6 9 17 4 12"/>
-                        </svg>
-                    </span>
-                    <span class="checkbox-label">He leído y comprendido la información. Acepto participar voluntariamente en este estudio.</span>
+                    <span style="font-size: 0.9rem; color: var(--color-text-secondary);">He leído y acepto participar voluntariamente.</span>
                 </label>
-
                 <div class="nav-buttons">
-                    <button class="btn btn-secondary" onclick="prevScreen()">
-                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="19" y1="12" x2="5" y2="12"/>
-                            <polyline points="12,19 5,12 12,5"/>
-                        </svg>
-                        Atrás
-                    </button>
-                    <button class="btn btn-primary" id="btn-consent-next" onclick="nextScreen()" disabled>
-                        Continuar
-                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="5" y1="12" x2="19" y2="12"/>
-                            <polyline points="12,5 19,12 12,19"/>
-                        </svg>
-                    </button>
+                    <button class="btn btn-secondary" onclick="prevScreen()">Atrás</button>
+                    <button class="btn btn-primary" id="btn-consent-next" onclick="nextScreen()" disabled>Continuar</button>
                 </div>
             </div>
         </section>
 
-        <!-- Demographics Screen -->
         <section class="screen" id="screen-demographics">
             <div class="card">
-                <div class="card-header">
-                    <div class="card-step">
-                        <span class="card-step-number">2</span>
-                        Datos Sociodemográficos
-                    </div>
-                    <h2 class="card-title">Sobre usted</h2>
-                </div>
-
+                <h2 style="font-family: var(--font-display); font-size: 1.75rem; margin-bottom: 1.5rem;">Datos Sociodemográficos</h2>
                 <form id="demographics-form">
-                    <!-- Role Selection -->
-                    <div class="form-group">
-                        <label class="form-label">¿Cuál es su perfil? <span class="required">*</span></label>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 500;">¿Cuál es su perfil?</label>
                         <div class="role-grid">
-                            <label class="role-card" id="role-card-professional">
+                            <label class="role-card">
                                 <input type="radio" name="role" value="profesional" onchange="updateRole(this)">
-                                <div class="role-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
-                                    </svg>
-                                </div>
-                                <div class="role-title">Profesional Sanitario</div>
-                                <div class="role-desc">Médico/a, enfermero/a u otro profesional</div>
+                                <div style="font-weight: 600; margin-bottom: 0.25rem;">Profesional Sanitario</div>
+                                <div style="font-size: 0.75rem; color: var(--color-text-muted);">Médico/a, enfermero/a...</div>
                             </label>
-                            <label class="role-card" id="role-card-citizen">
+                            <label class="role-card">
                                 <input type="radio" name="role" value="ciudadano" onchange="updateRole(this)">
-                                <div class="role-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                                        <circle cx="12" cy="7" r="4"/>
-                                    </svg>
-                                </div>
-                                <div class="role-title">Ciudadano/a</div>
-                                <div class="role-desc">Paciente o ciudadano/a general</div>
+                                <div style="font-weight: 600; margin-bottom: 0.25rem;">Ciudadano/a</div>
+                                <div style="font-size: 0.75rem; color: var(--color-text-muted);">Paciente o general</div>
                             </label>
                         </div>
                     </div>
 
-                    <div class="form-grid">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label" for="age">Edad <span class="required">*</span></label>
-                                <input type="number" id="age" name="age" min="18" max="120" placeholder="Ej: 35" class="form-input" required>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Sexo <span class="required">*</span></label>
-                                <select name="sex" class="form-select" required>
-                                    <option value="">Seleccione...</option>
-                                    <option value="mujer">Mujer</option>
-                                    <option value="hombre">Hombre</option>
-                                    <option value="otro">Otro / Prefiero no decir</option>
-                                </select>
-                            </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div>
+                            <input type="number" name="age" placeholder="Edad" class="form-input" required>
                         </div>
+                        <div>
+                            <select name="sex" class="form-select" required>
+                                <option value="">Sexo...</option>
+                                <option value="mujer">Mujer</option>
+                                <option value="hombre">Hombre</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+                    </div>
 
-                        <!-- Professional fields -->
-                        <div class="form-row professional-only hidden">
-                            <div class="form-group">
-                                <label class="form-label" for="profession">Profesión <span class="required">*</span></label>
-                                <select id="profession" name="profession" class="form-select">
-                                    <option value="">Seleccione...</option>
-                                    <option value="medicina_general">Medicina General / Familia</option>
-                                    <option value="medicina_interna">Medicina Interna</option>
-                                    <option value="cirugia">Cirugía</option>
-                                    <option value="pediatria">Pediatría</option>
-                                    <option value="ginecologia">Ginecología</option>
-                                    <option value="psiquiatria">Psiquiatría</option>
-                                    <option value="oncologia">Oncología</option>
-                                    <option value="radiologia">Radiología</option>
-                                    <option value="enfermeria">Enfermería</option>
-                                    <option value="farmacia">Farmacia</option>
-                                    <option value="psicologia_clinica">Psicología Clínica</option>
-                                    <option value="fisioterapia">Fisioterapia</option>
-                                    <option value="otra">Otra especialidad</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="experience">Años experiencia <span class="required">*</span></label>
-                                <input type="number" id="experience" name="experience" min="0" max="60" placeholder="Ej: 10" class="form-input">
-                            </div>
-                        </div>
+                    <div class="professional-only hidden">
+                        <select name="profession" class="form-select">
+                            <option value="">Profesión...</option>
+                            <option value="medicina">Medicina</option>
+                            <option value="enfermeria">Enfermería</option>
+                            <option value="psicologia">Psicología</option>
+                            <option value="otra">Otra</option>
+                        </select>
+                        <input type="number" name="experience" placeholder="Años experiencia" class="form-input">
+                    </div>
 
-                        <div class="form-group">
-                            <label class="form-label">Familiaridad con IA <span class="required">*</span></label>
-                            <p class="form-hint">¿Cómo de familiarizado/a está con sistemas de IA?</p>
-                            <div class="likert-container">
-                                <div class="likert-labels">
-                                    <span>Nada familiarizado/a</span>
-                                    <span>Muy familiarizado/a</span>
-                                </div>
-                                <div class="likert-scale">
-                                    <label class="likert-option">
-                                        <input type="radio" name="ai_familiarity" value="1" required>
-                                        <span class="likert-btn">1</span>
-                                    </label>
-                                    <label class="likert-option">
-                                        <input type="radio" name="ai_familiarity" value="2">
-                                        <span class="likert-btn">2</span>
-                                    </label>
-                                    <label class="likert-option">
-                                        <input type="radio" name="ai_familiarity" value="3">
-                                        <span class="likert-btn">3</span>
-                                    </label>
-                                    <label class="likert-option">
-                                        <input type="radio" name="ai_familiarity" value="4">
-                                        <span class="likert-btn">4</span>
-                                    </label>
-                                    <label class="likert-option">
-                                        <input type="radio" name="ai_familiarity" value="5">
-                                        <span class="likert-btn">5</span>
-                                    </label>
-                                </div>
-                            </div>
+                    <div style="margin-top: 1rem;">
+                        <label style="font-size: 0.8rem;">Familiaridad con IA (1-5)</label>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="ai_familiarity" value="1"><span class="likert-btn">1</span></label>
+                            <label class="likert-option"><input type="radio" name="ai_familiarity" value="2"><span class="likert-btn">2</span></label>
+                            <label class="likert-option"><input type="radio" name="ai_familiarity" value="3"><span class="likert-btn">3</span></label>
+                            <label class="likert-option"><input type="radio" name="ai_familiarity" value="4"><span class="likert-btn">4</span></label>
+                            <label class="likert-option"><input type="radio" name="ai_familiarity" value="5"><span class="likert-btn">5</span></label>
                         </div>
-
-                        <div class="form-group">
-                            <label class="form-label">¿Ha usado IA en contextos clínicos? <span class="required">*</span></label>
-                            <div class="radio-group horizontal">
-                                <label class="radio-option" onclick="selectRadio(this)">
-                                    <input type="radio" name="ai_clinical_use" value="si" required>
-                                    <span class="radio-circle"></span>
-                                    <span class="radio-text">Sí</span>
-                                </label>
-                                <label class="radio-option" onclick="selectRadio(this)">
-                                    <input type="radio" name="ai_clinical_use" value="no">
-                                    <span class="radio-circle"></span>
-                                    <span class="radio-text">No</span>
-                                </label>
-                                <label class="radio-option" onclick="selectRadio(this)">
-                                    <input type="radio" name="ai_clinical_use" value="no_seguro">
-                                    <span class="radio-circle"></span>
-                                    <span class="radio-text">No estoy seguro/a</span>
-                                </label>
-                            </div>
-                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 1rem;">
+                        <label style="font-size: 0.8rem;">¿Ha usado IA en contextos clínicos?</label>
+                        <select name="ai_clinical_use" class="form-select">
+                            <option value="">Seleccione...</option>
+                            <option value="si">Sí</option>
+                            <option value="no">No</option>
+                            <option value="no_seguro">No estoy seguro/a</option>
+                        </select>
                     </div>
                 </form>
-
                 <div class="nav-buttons">
-                    <button class="btn btn-secondary" onclick="prevScreen()">
-                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="19" y1="12" x2="5" y2="12"/>
-                            <polyline points="12,19 5,12 12,5"/>
-                        </svg>
-                        Atrás
-                    </button>
-                    <button class="btn btn-primary" onclick="validateDemographics()">
-                        Continuar
-                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="5" y1="12" x2="19" y2="12"/>
-                            <polyline points="12,5 19,12 12,19"/>
-                        </svg>
-                    </button>
+                    <button class="btn btn-secondary" onclick="prevScreen()">Atrás</button>
+                    <button class="btn btn-primary" onclick="validateDemographics()">Continuar</button>
                 </div>
             </div>
         </section>
 
-        <!-- Instructions Screen -->
         <section class="screen" id="screen-instructions">
             <div class="card">
-                <div class="card-header">
-                    <div class="card-step">
-                        <span class="card-step-number">3</span>
-                        Instrucciones
-                    </div>
-                    <h2 class="card-title">Cuestionario CONFIIA</h2>
-                </div>
-
-                <p style="color: var(--color-text-secondary); margin-bottom: 1.5rem; line-height: 1.7;">
-                    A continuación se presentan <strong style="color: var(--color-text);">6 situaciones hipotéticas</strong> relacionadas con el uso de inteligencia artificial en contextos sanitarios.
-                </p>
-
-                <p style="color: var(--color-text-secondary); margin-bottom: 1.5rem;">
-                    Para cada situación, indique la probabilidad de que actuaría de la forma descrita:
-                </p>
-
-                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-bottom: 2rem;">
-                    <div style="text-align: center; padding: 1rem; background: var(--color-bg-elevated); border-radius: var(--radius-sm);">
-                        <div style="font-family: var(--font-mono); font-size: 1.25rem; font-weight: 700; color: var(--color-accent); margin-bottom: 0.25rem;">1</div>
-                        <div style="font-size: 0.6875rem; color: var(--color-text-muted); text-transform: uppercase;">Muy improbable</div>
-                    </div>
-                    <div style="text-align: center; padding: 1rem; background: var(--color-bg-elevated); border-radius: var(--radius-sm);">
-                        <div style="font-family: var(--font-mono); font-size: 1.25rem; font-weight: 700; color: var(--color-accent); margin-bottom: 0.25rem;">2</div>
-                        <div style="font-size: 0.6875rem; color: var(--color-text-muted); text-transform: uppercase;">Improbable</div>
-                    </div>
-                    <div style="text-align: center; padding: 1rem; background: var(--color-bg-elevated); border-radius: var(--radius-sm);">
-                        <div style="font-family: var(--font-mono); font-size: 1.25rem; font-weight: 700; color: var(--color-accent); margin-bottom: 0.25rem;">3</div>
-                        <div style="font-size: 0.6875rem; color: var(--color-text-muted); text-transform: uppercase;">Probable</div>
-                    </div>
-                    <div style="text-align: center; padding: 1rem; background: var(--color-bg-elevated); border-radius: var(--radius-sm);">
-                        <div style="font-family: var(--font-mono); font-size: 1.25rem; font-weight: 700; color: var(--color-accent); margin-bottom: 0.25rem;">4</div>
-                        <div style="font-size: 0.6875rem; color: var(--color-text-muted); text-transform: uppercase;">Muy probable</div>
-                    </div>
-                </div>
-
-                <p style="font-style: italic; color: var(--color-text-muted); font-size: 0.875rem;">
-                    No hay respuestas correctas o incorrectas. Responda según su criterio personal.
-                </p>
-
+                <h2 style="font-family: var(--font-display); font-size: 1.75rem; margin-bottom: 1.5rem;">Instrucciones</h2>
+                <p style="color: var(--color-text-secondary); margin-bottom: 1.5rem;">A continuación verá 6 situaciones hipotéticas. Indique la probabilidad de actuar como se describe.</p>
                 <div class="nav-buttons">
-                    <button class="btn btn-secondary" onclick="prevScreen()">
-                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="19" y1="12" x2="5" y2="12"/>
-                            <polyline points="12,19 5,12 12,5"/>
-                        </svg>
-                        Atrás
-                    </button>
-                    <button class="btn btn-primary" onclick="nextScreen()">
-                        Comenzar
-                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="5" y1="12" x2="19" y2="12"/>
-                            <polyline points="12,5 19,12 12,19"/>
-                        </svg>
-                    </button>
+                    <button class="btn btn-secondary" onclick="prevScreen()">Atrás</button>
+                    <button class="btn btn-primary" onclick="nextScreen()">Comenzar</button>
                 </div>
             </div>
         </section>
 
-        <!-- Items Screen -->
         <section class="screen" id="screen-items">
             <div class="card">
-                <div class="progress-wrapper">
-                    <div class="progress-header">
-                        <span class="progress-label">Progreso</span>
-                        <span class="progress-count" id="progress-text">1 / 6</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="progress-fill" style="width: 16.66%"></div>
-                    </div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--color-text-muted); text-transform: uppercase;">
+                    <span>Progreso</span>
+                    <span id="progress-text">1 / 6</span>
                 </div>
-
-                <div class="item-wrapper" id="items-container">
-                    <!-- Items inserted dynamically -->
-                </div>
-
+                <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+                <div id="items-container" style="min-height: 250px;"></div>
                 <div class="nav-buttons">
-                    <button class="btn btn-secondary" id="btn-prev-item" onclick="prevItem()" style="visibility: hidden;">
-                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="19" y1="12" x2="5" y2="12"/>
-                            <polyline points="12,19 5,12 12,5"/>
-                        </svg>
-                        Anterior
-                    </button>
-                    <button class="btn btn-primary" id="btn-next-item" onclick="nextItem()" disabled>
-                        Siguiente
-                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="5" y1="12" x2="19" y2="12"/>
-                            <polyline points="12,5 19,12 12,19"/>
-                        </svg>
-                    </button>
+                    <button class="btn btn-secondary" id="btn-prev-item" onclick="prevItem()" style="visibility: hidden;">Anterior</button>
+                    <button class="btn btn-primary" id="btn-next-item" onclick="nextItem()" disabled>Siguiente</button>
                 </div>
             </div>
         </section>
 
-        <!-- End Screen -->
         <section class="screen" id="screen-end">
             <div class="card text-center">
-                <div class="completion-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                        <polyline points="22 4 12 14.01 9 11.01"/>
-                    </svg>
+                <div style="width: 80px; height: 80px; margin: 0 auto 2rem; display: flex; align-items: center; justify-content: center; background: rgba(16,185,129,0.1); border-radius: 50%; color: #10b981;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="40" height="40"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                 </div>
-                <h2 class="completion-title">¡Gracias por participar!</h2>
-                <p class="completion-message">
-                    Sus respuestas han sido registradas correctamente. Su contribución es valiosa para la investigación sobre confianza en IA clínica.
-                </p>
-                <div class="completion-code">
-                    <div class="completion-code-label">Código de participación</div>
-                    <div class="completion-code-value" id="participant-code">---</div>
-                </div>
-                <a href="https://anibalmastobiza.github.io/CONFIIA/" target="_blank" class="btn btn-secondary">
-                    Visitar web del proyecto
-                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                        <polyline points="15 3 21 3 21 9"/>
-                        <line x1="10" y1="14" x2="21" y2="3"/>
-                    </svg>
-                </a>
+                <h2 style="font-family: var(--font-display); font-size: 2rem; margin-bottom: 1rem;">¡Gracias por participar!</h2>
+                <p style="color: var(--color-text-secondary); margin-bottom: 2rem;">Sus respuestas han sido registradas correctamente. Su contribución es valiosa para la investigación.</p>
+                <a href="https://anibalmastobiza.github.io/CONFIIA/" class="btn btn-secondary">Volver al inicio</a>
             </div>
         </section>
     </main>
 
     <footer class="footer">
-        <span>© 2025 Proyecto CONFIIA · Universidad de Granada</span>
-        <span>Comité de Ética UGR</span>
+        <span>© 2025 Proyecto CONFIIA</span>
+        <span>Universidad Pontificia de Comillas y Universidad de Granada</span>
     </footer>
 
     <script>
-        // ============================================
-        // CONFIGURATION
-        // ============================================
-        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+        // CONFIGURACIÓN (URL sincronizada con tu app.js)
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzJEY-s_3onfo57Gp4mS43V5tEFS6kIyxPRWKfqvYJmZO7SXaBtw5kXXuc4jZUZkAxgtg/exec';
 
         const ITEMS_PROFESSIONAL = [
             { id: 'P1', dimension: 'Innovación-tradición', text: '¿Seguiría una recomendación innovadora de la IA frente a una tradicional si ambas son clínicamente plausibles?', reverse: true },
@@ -1440,9 +293,6 @@
             { id: 'C6', dimension: 'Autonomía comunicativa', text: '¿Utilizaría un chatbot de IA para recibir un diagnóstico sin ver antes a un médico?', reverse: true }
         ];
 
-        // ============================================
-        // STATE
-        // ============================================
         const state = {
             currentScreen: 0,
             currentItem: 0,
@@ -1455,116 +305,47 @@
 
         const screens = ['screen-welcome', 'screen-consent', 'screen-demographics', 'screen-instructions', 'screen-items', 'screen-end'];
 
-        // ============================================
-        // INIT
-        // ============================================
         document.addEventListener('DOMContentLoaded', () => {
-            state.participantId = generateId();
+            state.participantId = `CONFIIA-${Date.now().toString(36)}-${Math.random().toString(36).substring(2, 8)}`.toUpperCase();
             state.startTime = new Date().toISOString();
         });
 
-        function generateId() {
-            const ts = Date.now().toString(36);
-            const rnd = Math.random().toString(36).substring(2, 8);
-            return `CONFIIA-${ts}-${rnd}`.toUpperCase();
-        }
-
-        // ============================================
-        // NAVIGATION
-        // ============================================
         function nextScreen() {
-            if (state.currentScreen < screens.length - 1) {
-                document.getElementById(screens[state.currentScreen]).classList.remove('active');
-                state.currentScreen++;
-                document.getElementById(screens[state.currentScreen]).classList.add('active');
-                if (screens[state.currentScreen] === 'screen-items') initializeItems();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
+            document.getElementById(screens[state.currentScreen]).classList.remove('active');
+            state.currentScreen++;
+            document.getElementById(screens[state.currentScreen]).classList.add('active');
+            if (screens[state.currentScreen] === 'screen-items') initializeItems();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function prevScreen() {
-            if (state.currentScreen > 0) {
-                document.getElementById(screens[state.currentScreen]).classList.remove('active');
-                state.currentScreen--;
-                document.getElementById(screens[state.currentScreen]).classList.add('active');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
+            document.getElementById(screens[state.currentScreen]).classList.remove('active');
+            state.currentScreen--;
+            document.getElementById(screens[state.currentScreen]).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // ============================================
-        // CONSENT
-        // ============================================
         function validateConsent() {
-            const cb = document.getElementById('consent-check');
-            document.getElementById('btn-consent-next').disabled = !cb.checked;
+            document.getElementById('btn-consent-next').disabled = !document.getElementById('consent-check').checked;
         }
 
-        // ============================================
-        // ROLE
-        // ============================================
         function updateRole(input) {
             document.querySelectorAll('.role-card').forEach(c => c.classList.remove('selected'));
             input.closest('.role-card').classList.add('selected');
-            
-            const profFields = document.querySelectorAll('.professional-only');
-            if (input.value === 'profesional') {
-                state.role = 'profesional';
-                state.items = ITEMS_PROFESSIONAL;
-                profFields.forEach(f => f.classList.remove('hidden'));
-            } else {
-                state.role = 'ciudadano';
-                state.items = ITEMS_CITIZEN;
-                profFields.forEach(f => f.classList.add('hidden'));
-            }
+            state.role = input.value;
+            state.items = state.role === 'profesional' ? ITEMS_PROFESSIONAL : ITEMS_CITIZEN;
+            document.querySelectorAll('.professional-only').forEach(f => f.classList.toggle('hidden', state.role !== 'profesional'));
         }
 
-        function selectRadio(label) {
-            const group = label.closest('.radio-group');
-            group.querySelectorAll('.radio-option').forEach(o => o.classList.remove('selected'));
-            label.classList.add('selected');
-            label.querySelector('input').checked = true;
-        }
-
-        // ============================================
-        // DEMOGRAPHICS
-        // ============================================
         function validateDemographics() {
-            const form = document.getElementById('demographics-form');
-            const fd = new FormData(form);
-            const errors = [];
-
-            if (!fd.get('role')) errors.push('Seleccione su perfil');
-            if (!fd.get('age') || fd.get('age') < 18) errors.push('Indique su edad (mínimo 18)');
-            if (!fd.get('sex')) errors.push('Seleccione su sexo');
-            if (!fd.get('ai_familiarity')) errors.push('Indique su familiaridad con IA');
-            if (!fd.get('ai_clinical_use')) errors.push('Indique si ha usado IA clínica');
-
-            if (fd.get('role') === 'profesional') {
-                if (!fd.get('profession')) errors.push('Seleccione su profesión');
-                if (!fd.get('experience') && fd.get('experience') !== '0') errors.push('Indique años de experiencia');
+            const fd = new FormData(document.getElementById('demographics-form'));
+            if (!fd.get('role') || !fd.get('age') || !fd.get('sex') || !fd.get('ai_familiarity') || !fd.get('ai_clinical_use')) {
+                alert('Por favor, complete todos los campos obligatorios.'); return;
             }
-
-            if (errors.length) {
-                alert(errors.join('\n'));
-                return;
-            }
-
-            state.responses.demographics = {
-                role: fd.get('role'),
-                age: parseInt(fd.get('age')),
-                sex: fd.get('sex'),
-                profession: fd.get('role') === 'profesional' ? fd.get('profession') : 'N/A',
-                experience: fd.get('role') === 'profesional' ? parseInt(fd.get('experience')) : 'N/A',
-                ai_familiarity: parseInt(fd.get('ai_familiarity')),
-                ai_clinical_use: fd.get('ai_clinical_use')
-            };
-
+            state.responses.demographics = Object.fromEntries(fd.entries());
             nextScreen();
         }
 
-        // ============================================
-        // ITEMS
-        // ============================================
         function initializeItems() {
             const container = document.getElementById('items-container');
             container.innerHTML = state.items.map((item, i) => `
@@ -1572,21 +353,12 @@
                     <div class="item-dimension">${item.dimension}</div>
                     <p class="item-question">${item.text}</p>
                     <div class="likert-container">
-                        <div class="likert-labels">
-                            <span>Muy improbable</span>
-                            <span>Muy probable</span>
-                        </div>
+                        <div class="likert-labels"><span>Muy improbable</span><span>Muy probable</span></div>
                         <div class="likert-scale">
-                            ${[1,2,3,4].map(v => `
-                                <label class="likert-option">
-                                    <input type="radio" name="item-${item.id}" value="${v}" onchange="handleResponse('${item.id}', ${v})">
-                                    <span class="likert-btn">${v}</span>
-                                </label>
-                            `).join('')}
+                            ${[1,2,3,4].map(v => `<label class="likert-option"><input type="radio" name="item-${item.id}" value="${v}" onchange="handleResponse('${item.id}', ${v})"><span class="likert-btn">${v}</span></label>`).join('')}
                         </div>
                     </div>
-                </div>
-            `).join('');
+                </div>`).join('');
             updateProgress();
         }
 
@@ -1595,32 +367,25 @@
             document.getElementById('btn-next-item').disabled = false;
         }
 
-        function showItem(index) {
-            document.querySelectorAll('.item-card').forEach((c, i) => c.classList.toggle('active', i === index));
-            state.currentItem = index;
-
-            const prevBtn = document.getElementById('btn-prev-item');
-            const nextBtn = document.getElementById('btn-next-item');
-
-            prevBtn.style.visibility = index === 0 ? 'hidden' : 'visible';
-            nextBtn.disabled = !state.responses.items[state.items[index].id];
-            nextBtn.innerHTML = index === state.items.length - 1 
-                ? 'Finalizar <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>'
-                : 'Siguiente <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>';
-
-            updateProgress();
-        }
-
         function nextItem() {
             if (state.currentItem < state.items.length - 1) {
-                showItem(state.currentItem + 1);
+                state.currentItem++;
+                document.querySelectorAll('.item-card').forEach((c, i) => c.classList.toggle('active', i === state.currentItem));
+                document.getElementById('btn-prev-item').style.visibility = 'visible';
+                document.getElementById('btn-next-item').disabled = !state.responses.items[state.items[state.currentItem].id];
+                updateProgress();
             } else {
                 submitData();
             }
         }
 
         function prevItem() {
-            if (state.currentItem > 0) showItem(state.currentItem - 1);
+            if (state.currentItem > 0) {
+                state.currentItem--;
+                document.querySelectorAll('.item-card').forEach((c, i) => c.classList.toggle('active', i === state.currentItem));
+                document.getElementById('btn-prev-item').style.visibility = state.currentItem === 0 ? 'hidden' : 'visible';
+                updateProgress();
+            }
         }
 
         function updateProgress() {
@@ -1629,9 +394,6 @@
             document.getElementById('progress-text').textContent = `${state.currentItem + 1} / ${state.items.length}`;
         }
 
-        // ============================================
-        // SUBMIT
-        // ============================================
         async function submitData() {
             const payload = {
                 participant_id: state.participantId,
@@ -1642,43 +404,22 @@
             };
 
             const btn = document.getElementById('btn-next-item');
-            btn.classList.add('loading');
-            btn.disabled = true;
+            btn.classList.add('loading'); btn.disabled = true;
 
             try {
-                if (GOOGLE_SCRIPT_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
-                    await fetch(GOOGLE_SCRIPT_URL, {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-                } else {
-                    console.log('Demo mode:', payload);
-                }
-                document.getElementById('participant-code').textContent = state.participantId;
+                // ENVÍO REAL SIN RESTRICCIONES
+                await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: JSON.stringify(payload)
+                });
                 nextScreen();
             } catch (e) {
                 console.error(e);
-                alert('Error al enviar. Inténtelo de nuevo.');
-                btn.classList.remove('loading');
-                btn.disabled = false;
+                alert('Error de conexión. Inténtelo de nuevo.');
+                btn.classList.remove('loading'); btn.disabled = false;
             }
         }
-
-        // Keyboard shortcuts for items
-        document.addEventListener('keydown', (e) => {
-            if (screens[state.currentScreen] !== 'screen-items') return;
-            if (['1','2','3','4'].includes(e.key)) {
-                const itemId = state.items[state.currentItem].id;
-                const radio = document.querySelector(`input[name="item-${itemId}"][value="${e.key}"]`);
-                if (radio) { radio.checked = true; handleResponse(itemId, parseInt(e.key)); }
-            }
-            if (e.key === 'ArrowRight' || e.key === 'Enter') {
-                if (!document.getElementById('btn-next-item').disabled) nextItem();
-            }
-            if (e.key === 'ArrowLeft') prevItem();
-        });
     </script>
 </body>
 </html>
