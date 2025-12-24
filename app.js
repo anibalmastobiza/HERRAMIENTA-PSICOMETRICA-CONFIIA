@@ -26,13 +26,13 @@ const ITEMS_PROFESSIONAL = [
     {
         id: 'P3',
         dimension: 'Consenso experto',
-        text: '¿Implementaría una pauta personalizada generada por IA para un caso complejo, si el equipo clínico está convencido?',
+        text: '¿Implementaría una pauta personalizada generada por IA para un caso complejo, si su equipo clínico está convencido?',
         reverse: false
     },
     {
         id: 'P4',
         dimension: 'Consenso experto (inverso)',
-        text: '¿Implementaría la misma pauta si el equipo clínico se muestra escéptico?',
+        text: '¿Implementaría una pauta personalizada generada por IA para un caso complejo, si su equipo clínico es escéptico?',
         reverse: true
     },
     {
