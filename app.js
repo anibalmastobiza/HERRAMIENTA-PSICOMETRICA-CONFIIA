@@ -13,15 +13,15 @@ const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxStMX4l_OFwB
 const ITEMS_PROFESSIONAL = [
     {
         id: 'P1',
-        dimension: 'Innovación-tradición',
-        text: '¿Seguiría una recomendación innovadora de la IA frente a una tradicional si ambas son clínicamente plausibles?',
-        reverse: true
+        dimension: 'Precisión diagnóstica',
+        text: '¿Confiaría en un diagnóstico de alta precisión generado por IA para resolver un cuadro clínico de síntomas inespecíficos que ha resultado inconcluso para los especialistas humanos?',
+        reverse: false
     },
     {
         id: 'P2',
-        dimension: 'Explicabilidad-riesgo',
-        text: '¿Aprobaría una recomendación agresiva de la IA si su justificación no es explicable con claridad clínica?',
-        reverse: true
+        dimension: 'Explicabilidad del sistema',
+        text: '¿Validaría una recomendación clínica generada por IA que no ofrece una explicación causal clara (caja negra), aunque sus datos estadísticos indiquen una alta fiabilidad científica?',
+        reverse: true // "Sí" indica alta confianza ciega (riesgo), "No" indica cautela epistémica.
     },
     {
         id: 'P3',
@@ -38,14 +38,26 @@ const ITEMS_PROFESSIONAL = [
     {
         id: 'P5',
         dimension: 'Supervisión humana',
-        text: '¿Delegaría una decisión clínica crítica en una IA supervisada por humanos?',
-        reverse: false
+        text: '¿Autorizaría que un sistema autónomo (como un robot o algoritmo) ajuste dosis de medicación en pacientes basándose en variables ambientales y clínicas, sin requerir su validación manual previa?',
+        reverse: true
     },
     {
         id: 'P6',
-        dimension: 'Autonomía plena',
-        text: '¿Delegaría una decisión clínica crítica en una IA sin supervisión humana?',
+        dimension: 'Enfoque de tratamiento y estrategia',
+        text: '¿Prescribiría una intervención innovadora basada en análisis genómicos de IA si esta se desvía de los protocolos clínicos estándar aprobados actualmente?',
+        reverse: false
+    },
+    {
+        id: 'P7',
+        dimension: 'Momento/intensidad de la intervención',
+        text: '¿Indicaría un tratamiento invasivo y agresivo recomendado por la IA en un paciente asintomático, basándose exclusivamente en una detección algorítmica de riesgo futuro?',
         reverse: true
+    },
+    {
+        id: 'P8',
+        dimension: 'Contexto de pronóstico/complejidad',
+        text: '¿Se basaría en la predicción de un algoritmo de IA para determinar la limitación del esfuerzo terapéutico (paliativos) en una enfermedad rara con pronóstico vital incierto?',
+        reverse: false
     }
 ];
 
@@ -53,42 +65,47 @@ const ITEMS_PROFESSIONAL = [
 const ITEMS_CITIZEN = [
     {
         id: 'C1',
-        dimension: 'Explicabilidad-riesgo',
-        text: '¿Aceptaría un plan de tratamiento agresivo propuesto por la IA si no puede ser explicado con claridad por su médico?',
-        reverse: true
+        dimension: 'Precisión diagnóstica',
+        text: '¿Confiaría en un diagnóstico realizado por una IA que identifica su enfermedad con alta precisión cuando sus médicos no han logrado encontrar una respuesta clara a sus síntomas?',
+        reverse: false
     },
     {
         id: 'C2',
-        dimension: 'Innovación-tradición',
-        text: '¿Preferiría una recomendación tradicional frente a una innovadora de IA para su tratamiento?',
-        reverse: false
+        dimension: 'Explicabilidad del sistema',
+        text: '¿Aceptaría un tratamiento propuesto por una IA si su médico no puede explicarle con claridad por qué la máquina lo ha elegido (caja negra)?',
+        reverse: true
     },
     {
         id: 'C3',
-        dimension: 'Consenso experto',
-        text: '¿Se sentiría cómodo/a si el equipo clínico está convencido y respalda una decisión guiada por IA?',
-        reverse: false
+        dimension: 'Consenso de equipo',
+        text: '¿Mantendría su confianza en una intervención (ej. cirugía) recomendada por la IA si su equipo médico expresa dudas o reservas sobre dicha recomendación?',
+        reverse: true
     },
     {
         id: 'C4',
         dimension: 'Supervisión humana',
-        text: '¿Confiaría en una IA supervisada por humanos para decidir su pauta de tratamiento?',
+        text: '¿Se sentiría seguro/a utilizando un dispositivo de IA que monitoriza y ajusta automáticamente su medicación diaria sin que el médico revise cada cambio?',
         reverse: false
     },
     {
         id: 'C5',
-        dimension: 'Autonomía plena',
-        text: '¿Confiaría en una IA no supervisada para decidir su pauta de tratamiento?',
-        reverse: true
+        dimension: 'Enfoque de tratamiento y estrategia',
+        text: '¿Estaría dispuesto/a a recibir un tratamiento experimental personalizado recomendado por una IA que es diferente a los tratamientos tradicionales habituales?',
+        reverse: false
     },
     {
         id: 'C6',
-        dimension: 'Autonomía comunicativa',
-        text: '¿Utilizaría un chatbot de IA para recibir un diagnóstico sin ver antes a un médico?',
+        dimension: 'Momento/intensidad de la intervención',
+        text: '¿Aceptaría someterse a un tratamiento agresivo preventivo si una IA lo recomienda al detectar una enfermedad rara, aunque usted se sienta perfectamente sano/a?',
         reverse: true
+    },
+    {
+        id: 'C7',
+        dimension: 'Contexto de pronóstico/complejidad',
+        text: '¿Aceptaría la recomendación de una IA de pasar a cuidados paliativos (solo control de síntomas) si la máquina predice que su enfermedad ya no tiene cura posible?',
+        reverse: false
     }
 ];
-
 // ============================================
 // STATE MANAGEMENT
 // ============================================
