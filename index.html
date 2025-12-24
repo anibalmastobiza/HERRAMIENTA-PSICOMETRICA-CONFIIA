@@ -1404,33 +1404,119 @@
     </footer>
 
     <script>
+        /* ========================================
+           CONFIIA Survey - Application Logic
+           ======================================== */
+
         // ============================================
         // CONFIGURATION
         // ============================================
-        // URL CORRECTA INSERTADA
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwh6LtrEY0hZ_Z0AA-bFNupBIiLhG2w0KVq9ohoSlWf4YIAzB9ExzwyaqWzthxId3-eGg/exec';
 
+        // IMPORTANT: Replace this URL with your Google Apps Script Web App URL
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzQrKWf9tEzaF8TA6jZQ8VJPu9Er0rFr8AiBP91P5kzQm9Yo3ByjdmAUwN-VUqDmWETfg/exec';
+
+        // Items bank - Professional version
         const ITEMS_PROFESSIONAL = [
-            { id: 'P1', dimension: 'Innovación-tradición', text: '¿Seguiría una recomendación innovadora de la IA frente a una tradicional si ambas son clínicamente plausibles?', reverse: true },
-            { id: 'P2', dimension: 'Explicabilidad-riesgo', text: '¿Aprobaría una recomendación agresiva de la IA si su justificación no es explicable con claridad clínica?', reverse: true },
-            { id: 'P3', dimension: 'Consenso experto', text: '¿Implementaría una pauta personalizada generada por IA para un caso complejo, si el equipo clínico está convencido?', reverse: false },
-            { id: 'P4', dimension: 'Consenso experto (inverso)', text: '¿Implementaría la misma pauta si el equipo clínico se muestra escéptico?', reverse: true },
-            { id: 'P5', dimension: 'Supervisión humana', text: '¿Delegaría una decisión clínica crítica en una IA supervisada por humanos?', reverse: false },
-            { id: 'P6', dimension: 'Autonomía plena', text: '¿Delegaría una decisión clínica crítica en una IA sin supervisión humana?', reverse: true }
+            {
+                id: 'P1',
+                dimension: 'Precisión diagnóstica',
+                text: '¿Confiaría en un diagnóstico de alta precisión generado por IA para resolver un cuadro clínico de síntomas inespecíficos que ha resultado inconcluso para los especialistas humanos?',
+                reverse: false
+            },
+            {
+                id: 'P2',
+                dimension: 'Explicabilidad del sistema',
+                text: '¿Validaría una recomendación clínica generada por IA que no ofrece una explicación causal clara (caja negra), aunque sus datos estadísticos indiquen una alta fiabilidad científica?',
+                reverse: true // "Sí" indica alta confianza ciega (riesgo), "No" indica cautela epistémica.
+            },
+            {
+                id: 'P3',
+                dimension: 'Consenso experto',
+                text: '¿Implementaría una pauta personalizada generada por IA para un caso complejo, si el equipo clínico está convencido?',
+                reverse: false
+            },
+            {
+                id: 'P4',
+                dimension: 'Consenso experto (inverso)',
+                text: '¿Implementaría la misma pauta si el equipo clínico se muestra escéptico?',
+                reverse: true
+            },
+            {
+                id: 'P5',
+                dimension: 'Supervisión humana',
+                text: '¿Autorizaría que un sistema autónomo (como un robot o algoritmo) ajuste dosis de medicación en pacientes basándose en variables ambientales y clínicas, sin requerir su validación manual previa?',
+                reverse: true
+            },
+            {
+                id: 'P6',
+                dimension: 'Enfoque de tratamiento y estrategia',
+                text: '¿Prescribiría una intervención innovadora basada en análisis genómicos de IA si esta se desvía de los protocolos clínicos estándar aprobados actualmente?',
+                reverse: false
+            },
+            {
+                id: 'P7',
+                dimension: 'Momento/intensidad de la intervención',
+                text: '¿Indicaría un tratamiento invasivo y agresivo recomendado por la IA en un paciente asintomático, basándose exclusivamente en una detección algorítmica de riesgo futuro?',
+                reverse: true
+            },
+            {
+                id: 'P8',
+                dimension: 'Contexto de pronóstico/complejidad',
+                text: '¿Se basaría en la predicción de un algoritmo de IA para determinar la limitación del esfuerzo terapéutico (paliativos) en una enfermedad rara con pronóstico vital incierto?',
+                reverse: false
+            }
         ];
 
+        // Items bank - Citizen version
         const ITEMS_CITIZEN = [
-            { id: 'C1', dimension: 'Explicabilidad-riesgo', text: '¿Aceptaría un plan de tratamiento agresivo propuesto por la IA si no puede ser explicado con claridad por su médico?', reverse: true },
-            { id: 'C2', dimension: 'Innovación-tradición', text: '¿Preferiría una recomendación tradicional frente a una innovadora de IA para su tratamiento?', reverse: false },
-            { id: 'C3', dimension: 'Consenso experto', text: '¿Se sentiría cómodo/a si el equipo clínico está convencido y respalda una decisión guiada por IA?', reverse: false },
-            { id: 'C4', dimension: 'Supervisión humana', text: '¿Confiaría en una IA supervisada por humanos para decidir su pauta de tratamiento?', reverse: false },
-            { id: 'C5', dimension: 'Autonomía plena', text: '¿Confiaría en una IA no supervisada para decidir su pauta de tratamiento?', reverse: true },
-            { id: 'C6', dimension: 'Autonomía comunicativa', text: '¿Utilizaría un chatbot de IA para recibir un diagnóstico sin ver antes a un médico?', reverse: true }
+            {
+                id: 'C1',
+                dimension: 'Precisión diagnóstica',
+                text: '¿Confiaría en un diagnóstico realizado por una IA que identifica su enfermedad con alta precisión cuando sus médicos no han logrado encontrar una respuesta clara a sus síntomas?',
+                reverse: false
+            },
+            {
+                id: 'C2',
+                dimension: 'Explicabilidad del sistema',
+                text: '¿Aceptaría un tratamiento propuesto por una IA si su médico no puede explicarle con claridad por qué la máquina lo ha elegido (caja negra)?',
+                reverse: true
+            },
+            {
+                id: 'C3',
+                dimension: 'Consenso de equipo',
+                text: '¿Mantendría su confianza en una intervención (ej. cirugía) recomendada por la IA si su equipo médico expresa dudas o reservas sobre dicha recomendación?',
+                reverse: true
+            },
+            {
+                id: 'C4',
+                dimension: 'Supervisión humana',
+                text: '¿Se sentiría seguro/a utilizando un dispositivo de IA que monitoriza y ajusta automáticamente su medicación diaria sin que el médico revise cada cambio?',
+                reverse: false
+            },
+            {
+                id: 'C5',
+                dimension: 'Enfoque de tratamiento y estrategia',
+                text: '¿Estaría dispuesto/a a recibir un tratamiento experimental personalizado recomendado por una IA que es diferente a los tratamientos tradicionales habituales?',
+                reverse: false
+            },
+            {
+                id: 'C6',
+                dimension: 'Momento/intensidad de la intervención',
+                text: '¿Aceptaría someterse a un tratamiento agresivo preventivo si una IA lo recomienda al detectar una enfermedad rara, aunque usted se sienta perfectamente sano/a?',
+                reverse: true
+            },
+            {
+                id: 'C7',
+                dimension: 'Contexto de pronóstico/complejidad',
+                text: '¿Aceptaría la recomendación de una IA de pasar a cuidados paliativos (solo control de síntomas) si la máquina predice que su enfermedad ya no tiene cura posible?',
+                reverse: false
+            }
         ];
 
         // ============================================
-        // STATE
+        // STATE MANAGEMENT
         // ============================================
+
         const state = {
             currentScreen: 0,
             currentItem: 0,
@@ -1438,165 +1524,275 @@
             startTime: null,
             role: null,
             items: [],
-            responses: { consent: false, demographics: {}, items: {} }
+            responses: {
+                consent: false,
+                demographics: {},
+                items: {}
+            }
         };
 
-        const screens = ['screen-welcome', 'screen-consent', 'screen-demographics', 'screen-instructions', 'screen-items', 'screen-end'];
+        const screens = [
+            'screen-welcome',
+            'screen-consent',
+            'screen-demographics',
+            'screen-instructions',
+            'screen-items',
+            'screen-end'
+        ];
 
         // ============================================
-        // INIT
+        // INITIALIZATION
         // ============================================
+
         document.addEventListener('DOMContentLoaded', () => {
-            state.participantId = generateId();
+            state.participantId = generateParticipantId();
             state.startTime = new Date().toISOString();
+            initializeScreens();
         });
 
-        function generateId() {
-            const ts = Date.now().toString(36);
-            const rnd = Math.random().toString(36).substring(2, 8);
-            return `CONFIIA-${ts}-${rnd}`.toUpperCase();
+        function generateParticipantId() {
+            const timestamp = Date.now().toString(36);
+            const randomPart = Math.random().toString(36).substring(2, 8);
+            return `CONFIIA-${timestamp}-${randomPart}`.toUpperCase();
+        }
+
+        function initializeScreens() {
+            screens.forEach((screenId, index) => {
+                const screen = document.getElementById(screenId);
+                if (screen) {
+                    screen.classList.toggle('active', index === 0);
+                }
+            });
         }
 
         // ============================================
         // NAVIGATION
         // ============================================
+
         function nextScreen() {
             if (state.currentScreen < screens.length - 1) {
-                document.getElementById(screens[state.currentScreen]).classList.remove('active');
+                const currentScreenEl = document.getElementById(screens[state.currentScreen]);
                 state.currentScreen++;
-                document.getElementById(screens[state.currentScreen]).classList.add('active');
-                if (screens[state.currentScreen] === 'screen-items') initializeItems();
+                const nextScreenEl = document.getElementById(screens[state.currentScreen]);
+                
+                currentScreenEl.classList.remove('active');
+                nextScreenEl.classList.add('active');
+                
+                if (screens[state.currentScreen] === 'screen-items') {
+                    initializeItems();
+                }
+                
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
 
         function prevScreen() {
             if (state.currentScreen > 0) {
-                document.getElementById(screens[state.currentScreen]).classList.remove('active');
+                const currentScreenEl = document.getElementById(screens[state.currentScreen]);
                 state.currentScreen--;
-                document.getElementById(screens[state.currentScreen]).classList.add('active');
+                const nextScreenEl = document.getElementById(screens[state.currentScreen]);
+                
+                currentScreenEl.classList.remove('active');
+                nextScreenEl.classList.add('active');
+                
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
 
         // ============================================
-        // CONSENT
+        // CONSENT VALIDATION
         // ============================================
+
         function validateConsent() {
-            const cb = document.getElementById('consent-check');
-            document.getElementById('btn-consent-next').disabled = !cb.checked;
+            const checkbox = document.getElementById('consent-check');
+            const nextBtn = document.getElementById('btn-consent-next');
+            
+            state.responses.consent = checkbox.checked;
+            nextBtn.disabled = !checkbox.checked;
         }
 
         // ============================================
-        // ROLE
+        // ROLE SELECTION
         // ============================================
-        function updateRole(input) {
-            document.querySelectorAll('.role-card').forEach(c => c.classList.remove('selected'));
-            input.closest('.role-card').classList.add('selected');
+
+        function updateRole() {
+            const professionalRadio = document.getElementById('role-professional');
+            const citizenRadio = document.getElementById('role-citizen');
+            const professionalFields = document.querySelectorAll('.professional-only');
             
-            const profFields = document.querySelectorAll('.professional-only');
-            if (input.value === 'profesional') {
+            if (professionalRadio.checked) {
                 state.role = 'profesional';
                 state.items = ITEMS_PROFESSIONAL;
-                profFields.forEach(f => f.classList.remove('hidden'));
-            } else {
+                professionalFields.forEach(field => field.classList.remove('hidden'));
+            } else if (citizenRadio.checked) {
                 state.role = 'ciudadano';
                 state.items = ITEMS_CITIZEN;
-                profFields.forEach(f => f.classList.add('hidden'));
+                professionalFields.forEach(field => field.classList.add('hidden'));
             }
         }
 
-        function selectRadio(label) {
-            const group = label.closest('.radio-group');
-            group.querySelectorAll('.radio-option').forEach(o => o.classList.remove('selected'));
-            label.classList.add('selected');
-            label.querySelector('input').checked = true;
-        }
+        // ============================================
+        // DEMOGRAPHICS VALIDATION
+        // ============================================
 
-        // ============================================
-        // DEMOGRAPHICS
-        // ============================================
         function validateDemographics() {
             const form = document.getElementById('demographics-form');
-            const fd = new FormData(form);
-            const errors = [];
-
-            if (!fd.get('role')) errors.push('Seleccione su perfil');
-            if (!fd.get('age') || fd.get('age') < 18) errors.push('Indique su edad (mínimo 18)');
-            if (!fd.get('sex')) errors.push('Seleccione su sexo');
-            if (!fd.get('ai_familiarity')) errors.push('Indique su familiaridad con IA');
-            if (!fd.get('ai_clinical_use')) errors.push('Indique si ha usado IA clínica');
-
-            if (fd.get('role') === 'profesional') {
-                if (!fd.get('profession')) errors.push('Seleccione su profesión');
-                if (!fd.get('experience') && fd.get('experience') !== '0') errors.push('Indique años de experiencia');
+            const formData = new FormData(form);
+            
+            const role = formData.get('role');
+            const age = formData.get('age');
+            const sex = formData.get('sex');
+            const aiFamiliarity = formData.get('ai_familiarity');
+            const aiClinicalUse = formData.get('ai_clinical_use');
+            
+            let isValid = true;
+            let errorMessages = [];
+            
+            if (!role) {
+                isValid = false;
+                errorMessages.push('Por favor, seleccione su perfil');
             }
-
-            if (errors.length) {
-                alert(errors.join('\n'));
+            
+            if (!age || age < 18) {
+                isValid = false;
+                errorMessages.push('Por favor, indique su edad (mínimo 18 años)');
+            }
+            
+            if (!sex) {
+                isValid = false;
+                errorMessages.push('Por favor, seleccione su sexo');
+            }
+            
+            if (!aiFamiliarity) {
+                isValid = false;
+                errorMessages.push('Por favor, indique su familiaridad con IA');
+            }
+            
+            if (!aiClinicalUse) {
+                isValid = false;
+                errorMessages.push('Por favor, indique si ha usado IA en contextos clínicos');
+            }
+            
+            if (role === 'profesional') {
+                const profession = formData.get('profession');
+                const experience = formData.get('experience');
+                
+                if (!profession) {
+                    isValid = false;
+                    errorMessages.push('Por favor, seleccione su profesión');
+                }
+                
+                if (!experience && experience !== 0) {
+                    isValid = false;
+                    errorMessages.push('Por favor, indique sus años de experiencia');
+                }
+            }
+            
+            if (!isValid) {
+                alert(errorMessages.join('\n'));
                 return;
             }
-
+            
             state.responses.demographics = {
-                role: fd.get('role'),
-                age: parseInt(fd.get('age')),
-                sex: fd.get('sex'),
-                profession: fd.get('role') === 'profesional' ? fd.get('profession') : 'N/A',
-                experience: fd.get('role') === 'profesional' ? parseInt(fd.get('experience')) : 'N/A',
-                ai_familiarity: parseInt(fd.get('ai_familiarity')),
-                ai_clinical_use: fd.get('ai_clinical_use')
+                role: role,
+                age: parseInt(age),
+                sex: sex,
+                profession: role === 'profesional' ? formData.get('profession') : 'N/A',
+                experience: role === 'profesional' ? parseInt(formData.get('experience')) : 'N/A',
+                ai_familiarity: parseInt(aiFamiliarity),
+                ai_clinical_use: aiClinicalUse
             };
-
+            
             nextScreen();
         }
 
         // ============================================
-        // ITEMS
+        // ITEMS MANAGEMENT
         // ============================================
+
         function initializeItems() {
             const container = document.getElementById('items-container');
-            container.innerHTML = state.items.map((item, i) => `
-                <div class="item-card ${i === 0 ? 'active' : ''}" id="item-${i}">
-                    <div class="item-dimension">${item.dimension}</div>
+            container.innerHTML = '';
+            
+            state.items.forEach((item, index) => {
+                const itemHtml = createItemCard(item, index);
+                container.innerHTML += itemHtml;
+            });
+            
+            showItem(0);
+            updateProgress();
+        }
+
+        function createItemCard(item, index) {
+            return `
+                <div class="item-card" id="item-${index}" data-item-id="${item.id}">
+                    <div class="item-number">
+                        Pregunta ${index + 1} de ${state.items.length}
+                        <span class="item-dimension">${item.dimension}</span>
+                    </div>
                     <p class="item-question">${item.text}</p>
-                    <div class="likert-container">
-                        <div class="likert-labels">
-                            <span>Muy improbable</span>
-                            <span>Muy probable</span>
-                        </div>
-                        <div class="likert-scale">
-                            ${[1,2,3,4].map(v => `
+                    <div class="item-scale">
+                        <div class="likert-options">
+                            ${[1, 2, 3, 4].map(value => `
                                 <label class="likert-option">
-                                    <input type="radio" name="item-${item.id}" value="${v}" onchange="handleResponse('${item.id}', ${v})">
-                                    <span class="likert-btn">${v}</span>
+                                    <input type="radio" 
+                                           name="item-${item.id}" 
+                                           value="${value}" 
+                                           onchange="handleItemResponse('${item.id}', ${value}, ${index})">
+                                    <span class="likert-circle">${value}</span>
                                 </label>
                             `).join('')}
                         </div>
+                        <div class="item-scale-labels">
+                            <span>Muy improbable</span>
+                            <span>Muy probable</span>
+                        </div>
                     </div>
                 </div>
-            `).join('');
-            updateProgress();
-        }
-
-        function handleResponse(itemId, value) {
-            state.responses.items[itemId] = value;
-            document.getElementById('btn-next-item').disabled = false;
+            `;
         }
 
         function showItem(index) {
-            document.querySelectorAll('.item-card').forEach((c, i) => c.classList.toggle('active', i === index));
+            const items = document.querySelectorAll('.item-card');
+            items.forEach((item, i) => {
+                item.classList.toggle('active', i === index);
+            });
+            
             state.currentItem = index;
-
+            
             const prevBtn = document.getElementById('btn-prev-item');
             const nextBtn = document.getElementById('btn-next-item');
-
+            
             prevBtn.style.visibility = index === 0 ? 'hidden' : 'visible';
-            nextBtn.disabled = !state.responses.items[state.items[index].id];
-            nextBtn.innerHTML = index === state.items.length - 1 
-                ? 'Finalizar <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>'
-                : 'Siguiente <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>';
-
+            
+            const currentItemId = state.items[index].id;
+            const isAnswered = state.responses.items[currentItemId] !== undefined;
+            nextBtn.disabled = !isAnswered;
+            
+            if (index === state.items.length - 1) {
+                nextBtn.innerHTML = `
+                    Finalizar
+                    <svg class="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                        <polyline points="12,5 19,12 12,19"/>
+                    </svg>
+                `;
+            } else {
+                nextBtn.innerHTML = `
+                    Siguiente
+                    <svg class="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                        <polyline points="12,5 19,12 12,19"/>
+                    </svg>
+                `;
+            }
+            
             updateProgress();
+        }
+
+        function handleItemResponse(itemId, value, index) {
+            state.responses.items[itemId] = value;
+            document.getElementById('btn-next-item').disabled = false;
         }
 
         function nextItem() {
@@ -1608,62 +1804,104 @@
         }
 
         function prevItem() {
-            if (state.currentItem > 0) showItem(state.currentItem - 1);
+            if (state.currentItem > 0) {
+                showItem(state.currentItem - 1);
+            }
         }
 
         function updateProgress() {
-            const pct = ((state.currentItem + 1) / state.items.length) * 100;
-            document.getElementById('progress-fill').style.width = `${pct}%`;
-            document.getElementById('progress-text').textContent = `${state.currentItem + 1} / ${state.items.length}`;
+            const progress = ((state.currentItem + 1) / state.items.length) * 100;
+            document.getElementById('progress-fill').style.width = `${progress}%`;
+            document.getElementById('progress-text').textContent = 
+                `Pregunta ${state.currentItem + 1} de ${state.items.length}`;
         }
 
         // ============================================
-        // SUBMIT
+        // DATA SUBMISSION
         // ============================================
+
         async function submitData() {
+            const endTime = new Date().toISOString();
+            
             const payload = {
                 participant_id: state.participantId,
                 start_time: state.startTime,
-                end_time: new Date().toISOString(),
-                ...state.responses.demographics,
+                end_time: endTime,
+                role: state.responses.demographics.role,
+                age: state.responses.demographics.age,
+                sex: state.responses.demographics.sex,
+                profession: state.responses.demographics.profession,
+                experience: state.responses.demographics.experience,
+                ai_familiarity: state.responses.demographics.ai_familiarity,
+                ai_clinical_use: state.responses.demographics.ai_clinical_use,
                 ...state.responses.items
             };
-
-            const btn = document.getElementById('btn-next-item');
-            btn.classList.add('loading');
-            btn.disabled = true;
-
+            
+            const nextBtn = document.getElementById('btn-next-item');
+            nextBtn.classList.add('loading');
+            nextBtn.disabled = true;
+            
             try {
-                // SECCIÓN CORREGIDA: ENVÍO REAL SIN "DEMO MODE"
-                await fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
+                if (GOOGLE_SCRIPT_URL !== 'https://script.google.com/macros/s/AKfycbzQrKWf9tEzaF8TA6jZQ8VJPu9Er0rFr8AiBP91P5kzQm9Yo3ByjdmAUwN-VUqDmWETfg/exec') {
+                    await fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(payload)
+                    });
+                } else {
+                    console.log('Survey data (demo mode):', payload);
+                }
                 
-                // Ya no mostramos el código visualmente, pero se guarda en el estado por si acaso
+               
                 nextScreen();
-            } catch (e) {
-                console.error(e);
-                alert('Error al enviar. Inténtelo de nuevo.');
-                btn.classList.remove('loading');
-                btn.disabled = false;
+                
+            } catch (error) {
+                console.error('Error submitting data:', error);
+                alert('Ha ocurrido un error al enviar los datos. Por favor, inténtelo de nuevo.');
+                nextBtn.classList.remove('loading');
+                nextBtn.disabled = false;
             }
         }
 
-        // Keyboard shortcuts for items
+        // ============================================
+        // UTILITY FUNCTIONS
+        // ============================================
+
+        window.addEventListener('beforeunload', (e) => {
+            if (state.currentScreen > 0 && state.currentScreen < screens.length - 1) {
+                e.preventDefault();
+                e.returnValue = '';
+            }
+        });
+
         document.addEventListener('keydown', (e) => {
             if (screens[state.currentScreen] !== 'screen-items') return;
-            if (['1','2','3','4'].includes(e.key)) {
-                const itemId = state.items[state.currentItem].id;
-                const radio = document.querySelector(`input[name="item-${itemId}"][value="${e.key}"]`);
-                if (radio) { radio.checked = true; handleResponse(itemId, parseInt(e.key)); }
+            
+            const key = e.key;
+            
+            if (['1', '2', '3', '4'].includes(key)) {
+                const value = parseInt(key);
+                const currentItemId = state.items[state.currentItem].id;
+                const radio = document.querySelector(`input[name="item-${currentItemId}"][value="${value}"]`);
+                if (radio) {
+                    radio.checked = true;
+                    handleItemResponse(currentItemId, value, state.currentItem);
+                }
             }
+            
             if (e.key === 'ArrowRight' || e.key === 'Enter') {
-                if (!document.getElementById('btn-next-item').disabled) nextItem();
+                const nextBtn = document.getElementById('btn-next-item');
+                if (!nextBtn.disabled) {
+                    nextItem();
+                }
             }
-            if (e.key === 'ArrowLeft') prevItem();
+            
+            if (e.key === 'ArrowLeft') {
+                prevItem();
+            }
         });
     </script>
 </body>
